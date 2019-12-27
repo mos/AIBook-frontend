@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/header.css" />
+		<link rel="stylesheet" href="css/iconfont.css" />
+		<style type="text/css">
+			body{
+				background-color: white;
+			}
+			header{
+				position: fixed;
+			}
+			.container{
+				padding-top: 50px;
+			}
+			.banbentitle{
+				padding: 10px 0;
+				padding-left: 15px;
+				font-size: 19px;
+				color: #383838;
+				font-family: "微软雅黑";
+				border-bottom: 1px solid gainsboro;
+			}
+			.content{
+				font-size: 15px;
+				padding: 15px 10px;
+				font-family: "微软雅黑";
+				color: #383838;
+				text-indent: 16px;
+				border-bottom: 1px solid gainsboro;
+			}
+			.mui-collapse-content>p{
+				text-indent: 16px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="myheader"> 
+			<div class="mui-action-back"> 
+				<i class="iconfont icon-jiantou_liebiaoxiangzuo"></i>
+			</div>
+			<div>产品信息</div>
+		</header>
+		<div class="container">
+			<div class="banbentitle">版本号: 0.0.3</div>
+			<div class="content">
+				本产品第四版，功能包含语音输入，文字输入，对预算的超额的提醒，自动推荐预算。
+			</div>
+			<div class="banbentitle">版本预告</div>
+			<div class="content">
+				下一版本预计加入商品推送。
+			</div>
+			<div class="banbentitle">历史版本</div>
+			<ul class="mui-table-view"> 
+        <li class="mui-table-view-cell mui-collapse">
+          <a class="mui-navigate-right" href="#">0.0.0</a>
+          <div class="mui-collapse-content">
+            <p>本产品初版，功能包含语音输入，消费查看。</p>
+          </div>
+        </li>
+        <li class="mui-table-view-cell mui-collapse">
+          <a class="mui-navigate-right" href="#">0.0.1</a>
+          <div class="mui-collapse-content">
+            <p>本产品第二版，改进界面，加入图形报表，预留商品推送位置。</p>
+          </div>
+        </li>
+        <li class="mui-table-view-cell mui-collapse">
+          <a class="mui-navigate-right" href="#">0.0.2</a>
+          <div class="mui-collapse-content">
+            <p>本产品第三版，更新界面，加入新用户资料。</p>
+          </div>
+        </li>
+	    </ul>
+		</div>
+		
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+	</body>
+
+</html>

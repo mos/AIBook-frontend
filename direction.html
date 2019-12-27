@@ -1,0 +1,173 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/header.css" />
+		<link rel="stylesheet" href="css/iconfont.css" />
+		<style type="text/css">
+			body{
+				background-color: white;
+			}
+			.myheader{
+				position: fixed;
+				top: 0;
+				background-color: white;
+				z-index: 3;
+			}
+			.container{
+				width: 100%;
+				margin-top: 50px;
+			}
+			.navcontainer{
+				position: fixed;
+				width: 20%;
+				margin-top: 10px;
+				text-align: center;
+				
+			}
+			.navcontainer>a{
+				font-size: 20px;
+				color: #555555;
+				font-family: "微软雅黑";
+				line-height: 30px;
+			}
+			.stepcontainier{
+				width: 80%;
+				margin-left: 20%;
+			}
+			.isClick{
+				font-weight: bold;
+			}
+			.title{
+				font-family: "微软雅黑";
+				color: #555555;
+				width: 100%;
+				padding: 30px 0;
+				
+			}
+			.steps>div{
+				float: left;
+			}
+			.stepimg{
+				width: 55%;
+				text-align: center;
+			}
+			.stepimg>img{
+				width: 100%;
+				margin-bottom: 5px;
+			}
+			.stepimg>span{
+				font-size: 13px;
+				font-family: "微软雅黑";
+				letter-spacing: 1px;
+			}
+			.steptext{
+				width: 45%;
+				padding: 15px 5px;
+				text-indent: 16px;
+				font-family: "微软雅黑";
+				font-size: 14px;
+				color: #383838;
+				word-break: break-all;
+			}
+		</style>
+	</head>
+
+	<body>
+		
+		<header class="myheader"> 
+			<div class="mui-action-back"> 
+				<i class="iconfont icon-jiantou_liebiaoxiangzuo"></i>
+			</div>
+			<div>使用说明</div>
+		</header>
+		<div class="container">
+			<div class="navcontainer">
+				<a id="one" href="#yuyin" class="navitem isClick">录入</a><br />
+				<a id="two" href="#jianpan" class="navitem">修改</a><br />
+				<a id="three" href="#xiugai" class="navitem">查询</a><br />
+			</div>
+			<div id="stepcontainer" class="stepcontainier">
+				
+				
+				<div class="steps">
+					<div id="yuyin" class="title">账单记录说明</div>
+					<div class="stepimg">
+						<img src="image/jietu/s1.png" />
+						<span>步骤一</span>
+					</div>
+					<div class="steptext">
+						首次进入下方两个选项，一个是语音输入，另外是键盘输入，点击带有语音图标的按钮，由此进入语音界面，点键盘，开始键盘输入。
+					</div>
+					<div class="stepimg">
+						<img src="image/jietu/s2.png" />
+						<span>步骤二</span>
+					</div>
+					<div class="steptext">
+						语音输入时，点击中间的按钮并按住以语音。松开按键可选择重新录制或发送。键盘输入时，输入文字后点提交。系统分析之后会得出结果，点击出现的结果右侧按钮可进行修改。
+					</div>
+				</div>
+				
+				<div class="steps">
+					<div id="jianpan" class="title">账单修改说明</div>
+					<div class="stepimg">
+						<img src="image/jietu/s3.png" />
+						<span>步骤一</span>
+					</div>
+					<div class="steptext">
+						进入修改页面后，点击时间下方会出现时间选择器，可自行选择。支出收入类型，涉及金额，涉及事件可自行填写，之后点确定即可
+					</div>
+				</div>
+				<div class="steps">
+					<div id="xiugai" class="title">详细及报表说明</div>
+					<div class="stepimg">
+						<img src="image/jietu/s4.png" />
+						<span>详细</span>
+					</div>
+					<div class="steptext">
+						详细页面，默认显示当日详细，点击日历可选择其他日期详细消费情况。
+					</div>
+					<div class="stepimg">
+						<img src="image/jietu/s5.png" />
+						<span>报表</span>
+					</div>
+					<div class="steptext">
+						进入报表页，默认显示当前月总览。折现图右侧点击对比，可将上月与本月消费进行对比。收支柱状图轻触可查看当日收支总额。
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			mui.plusReady(function(){
+				var height = window.screen.availHeight;
+				var one = document.getElementById("one");
+				var two = document.getElementById("two");
+				var three = document.getElementById("three");
+				one.addEventListener('tap',function(){
+					one.className = "navitem isClick";
+					two.className = "navitem";
+					three.className = "navitem";
+				});
+				two.addEventListener('tap',function(){
+					one.className = "navitem";
+					two.className = "navitem isClick";
+					three.className = "navitem";
+				});
+				three.addEventListener('tap',function(){
+					one.className = "navitem";
+					two.className = "navitem";
+					three.className = "navitem isClick";
+				});
+			})
+			
+		</script>
+	</body>
+	
+</html>

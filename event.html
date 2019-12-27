@@ -1,0 +1,73 @@
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/header.css" />
+		<link rel="stylesheet" href="css/buttongroup.css" />
+		<link rel="stylesheet" href="css/iconfont.css" />
+	</head>
+	<style type="text/css">
+		body{
+			background-color: white;
+		}
+		.inputtitle{
+			margin-left: 15px;
+			margin-top: 40px;
+			font-size: 18px;
+		}
+		.inputcontent{
+			margin-left: 7%;
+			margin-top: 20px;
+			width: 86%;
+		}
+		.inputcontent>input{
+			height: 30px;
+			line-height: 10px;
+		}
+		
+	</style>
+	<body>
+		
+		
+		<header class="myheader"> 
+			<div class="mui-action-back"> 
+				<i class="iconfont icon-jiantou_liebiaoxiangzuo"></i>
+			</div>
+			<div>收支事件</div>
+		</header>
+		<div class="inputgroup">
+			<div class="inputtitle">输入收支事件</div>
+			<div class="inputcontent">
+				<input id="myinput" type="text"/>
+			</div>
+		</div>
+		<div class="buttongroup">
+			<button>重置</button>
+			<button id="sub">提交</button>
+		</div>
+		
+		
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			var myinput = document.getElementById("myinput");
+			var sub = document.getElementById("sub");
+			
+			sub.addEventListener('tap',function(){
+				console.log(myinput.value);
+				mui.post('https://dc.1zdz.cn/api/root/analyzetext.php',{ //请求接口地址
+	    			userstr : myinput.value
+	    		},
+	    		function(data){ //data为服务器端返回数据
+	    			console.log(data.data.thing);
+	    			//自己的逻辑
+	    		},'json' //接受数据格式
+	    	);
+			});
+		</script>
+	</body>
+
+</html>

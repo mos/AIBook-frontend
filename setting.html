@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/header.css" />
+		<link rel="stylesheet" href="css/iconfont.css" />
+		<style type="text/css">
+			body{
+				background-color: white;
+			}
+			.listcontainer{
+				margin-top: 30px;
+			}
+			.mui-table-view{
+				border: 0px;
+			}
+			.mui-table-view-cell{
+				padding-left: 25px;
+				font-family: "微软雅黑";
+			}
+			.mui-switch.mui-active{
+				border-color: rgba(0,157,146,100);
+				background-color: rgba(0,157,146,100);
+			}
+			.bigbutton{
+				width: 100%;
+				margin-top: 40px;
+				text-align: center;
+			}
+			.bigbutton>button{
+				width: 200px;
+				height: 40px;
+				border-radius: 30px;
+				background-color: rgba(0,157,146,100);
+				font-family: "微软雅黑";
+				border: 0px;
+				box-shadow: 0 0 2px gray;
+				font-size: 17px;
+				color: white;
+			}
+		</style>
+	</head>
+
+	<body>
+		
+		<header class="myheader"> 
+			<div class="mui-action-back"> 
+				<i class="iconfont icon-jiantou_liebiaoxiangzuo"></i>
+			</div>
+			<div>设置</div>
+		</header>
+		<div class="listcontainer">
+			<ul class="mui-table-view">
+		    <li class="mui-table-view-cell">清除缓存</li>
+		    <li class="mui-table-view-cell">
+		    	超预算提醒
+		    	<div class="mui-switch mui-switch-mini mui-active">
+					  <div class="mui-switch-handle"></div>
+					</div>
+		    </li>
+		    <li class="mui-table-view-cell checkupdate">检查更新</li>
+		    <li class="mui-table-view-cell feed">问题反馈</li>
+			</ul>
+		</div>
+		<div class="bigbutton">
+			<button id="btn-exit">退出账号</button>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			mui(".listcontainer").on('tap','.checkupdate',function(){
+			  mui.toast('当前版本已是最新！',{ duration:'long', type:'div' });
+			});
+			mui(".listcontainer").on('tap','.feed',function(){
+			  mui.openWindow("feedback.html");
+			});
+			mui(".bigbutton").on('tap','#btn-exit',function(){ 
+				console.log("退出登录"); 
+				localStorage.clear();  
+				mui.openWindow("index.html");
+			});
+			
+		</script>
+	</body>
+
+</html>

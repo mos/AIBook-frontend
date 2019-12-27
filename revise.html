@@ -1,0 +1,271 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/header.css" />
+		<link rel="stylesheet" href="css/buttongroup.css" />
+		<link rel="stylesheet" href="css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="css/mui.picker.min.css" /> 
+		<style type="text/css">
+			body{
+				background-color: white;
+			}
+			.stitle{
+				height: 40px;
+				line-height: 40px;
+				font-size: 20px;
+				font-family: "微软雅黑";
+				color: #383838;
+				padding-left: 5%;
+				padding-top: 5px;
+			}
+			.section{
+				width: 80%;
+				margin-left: 10%;
+			}
+			.section>div{
+				display: flex;
+				height: 40px;
+				line-height: 40px;
+			}
+			.section>div>div:nth-child(1){
+				letter-spacing: 5px;
+				flex: 3;
+			}
+			.section>div>div:nth-child(2){
+				flex: 8;
+				border-bottom: 1px solid whitesmoke;
+			}
+			.title{
+				font-family: "微软雅黑";
+				font-size: 18px;
+				color: gray;	
+			}
+			.newevent{
+				width: 86%;
+				margin-left: 7%;
+			}
+			.newevent>input,.money>input,.thing>input{
+				border: 0;
+				border-radius: 0px;
+				border-bottom: 1px solid whitesmoke;
+				font-size: 17px;
+			}
+			.newevent>input:focus,.money>input:focus,.thing>input:focus{
+				border-bottom: 1px solid limegreen;
+			}
+			.radiogroup{
+				padding-left: 17px;
+				font-size: 18px;
+				font-family: "微软雅黑";
+			}
+			.radiogroup>input{
+				margin: 0px 5px;
+			}
+			.datepicker{
+				font-size: 20px;
+				padding-left: 20px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="myheader"> 
+			<div class="mui-action-back"> 
+				<i class="iconfont icon-jiantou_liebiaoxiangzuo"></i>
+			</div>
+			<div>修改</div>
+		</header>
+        <div class="stitle">记账修正</div>
+		<div class="section">
+			<div>
+				<div class="title">时间：</div>
+				<div class="datepicker" id='datepicker' data-options='{}' ></div>
+			</div>
+			<div>
+				<div class="title">类型：</div>
+				<div class="radiogroup">
+					<input type="radio" id="in" name="type" />收入
+					<input type="radio" id="out" name="type" />支出
+				</div>
+			</div>
+			<div>
+				<div class="title">金额：</div>
+				<div class="money"><input type="text" id="money" placeholder="请输入事件金额"/></div>
+			</div>
+			<div>
+				<div class="title">事件：</div>
+				<div class="thing"><input type="text" id="thing" placeholder="请输入事件关键词"/></div>
+			</div>
+		</div>	
+		<!--<div class="stitle">事件描述</div>
+		<div class="newevent">
+			<input id="newthing" type="text" placeholder="请输入新事件描述" />
+		</div>-->
+		<div class="buttongroup">
+			<!--<button id="reset">重置</button>-->
+			<button id="submit">确定</button>
+		</div>
+		
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript" src="js/mui.picker.min.js" ></script>
+		<script type="text/javascript">
+			mui.init();
+			mui.plusReady(function(){
+				var self = plus.webview.currentWebview();
+				console.log(self.money);
+				console.log(self.time);
+				console.log(self.thing);
+				console.log(self.type);
+				console.log(self.cid);
+				var time = document.getElementById("datepicker");
+				var income = document.getElementById("in");
+				var cost = document.getElementById("out");
+				var money = document.getElementById("money");
+				var thing = document.getElementById("thing");
+				var rreset = document.getElementById("reset");
+				var rsubmit = document.getElementById("rsubmit");
+				var newthing = document.getElementById("newthing");
+				time.innerText = self.time;
+				money.value = self.money;
+				thing.value = self.thing;
+				cid = self.cid;
+				if(self.type == "in"){
+					income.checked = true;
+				}else{
+					cost.checked = true; 
+				}
+				
+				/*日期选择器*/	
+					time.addEventListener('tap', function() {
+						var _self = this;
+						if(_self.picker) {
+							_self.picker.show(function (rs) {
+								result.innerText = '选择结果: ' + rs.text;
+								_self.picker.dispose();
+								_self.picker = null;
+							});
+						} else {
+							var optionsJson = this.getAttribute('data-options') || '{}';
+							var options = JSON.parse(optionsJson);
+							var id = this.getAttribute('id');
+							/*
+							 * 首次显示时实例化组件
+							 * 示例为了简洁，将 options 放在了按钮的 dom 上
+							 * 也可以直接通过代码声明 optinos 用于实例化 DtPicker
+							 */
+							_self.picker = new mui.DtPicker(options);
+							_self.picker.show(function(rs) {
+								/*
+								 * rs.value 拼合后的 value
+								 * rs.text 拼合后的 text
+								 * rs.y 年，可以通过 rs.y.vaue 和 rs.y.text 获取值和文本
+								 * rs.m 月，用法同年
+								 * rs.d 日，用法同年
+								 * rs.h 时，用法同年
+								 * rs.i 分（minutes 的第二个字母），用法同年
+								 */
+								time.innerText = rs.text;
+								_self.picker.dispose();
+								_self.picker = null;
+							});
+						}
+					}, false);
+				/*-------------*/	
+				/*重置*/
+				
+//				reset.addEventListener('tap',function(){
+//					time.innerText = self.time;
+//					money.innerText = self.money;
+//					thing.innerText = self.thing;
+//					if(self.type == "in"){
+//						income.checked = true;
+//					}else{
+//						cost.checked = true; 
+//					}
+//				});
+				/*----*/
+				/*提交*/
+				
+				submit.addEventListener('tap',function(){
+					var da = new Date(time.innerText+":00");
+					var thetime = da.getTime();
+					var thetype = (income.checked == true) ? "in" : "out" ;
+					var themoney = money.value;
+					var thething = thing.value;
+					var localtoken = localStorage.getItem("token");
+					if(localtoken == null){
+						showvistor();
+					}else{
+						console.log("提交数据：cid="+cid+",time="+thetime+",thetype:"+thetype+",themoney="+themoney+",thething="+thething);
+						mui.confirm("确认修改信息吗？","提示",['否','是'],function(e){
+							if (e.index == 1) {
+								mui.post('https://dc.1zdz.cn/root/consume/insert.php',{
+										token:localtoken,
+										time:thetime,
+										money:themoney,
+										type:thetype,
+										thing:thething
+									},function(data){
+										console.log(data.disc);
+										if(data.code == 100){
+											var mainAll = plus.webview.getLaunchWebview();
+											mui.fire(mainAll,'mainTran',{
+												"revisetype" : thetype ,
+												"revisemoney" : themoney
+											});  
+											mui.toast("添加成功！");
+											
+											mui.back();
+										}else{
+											mui.toast("添加失败！录入取消");
+											mui.back();
+										}
+									},'json'
+								);
+							}else{
+								mui.toast("您已取消确认");
+							}
+						});
+					}
+					
+				});
+				
+				/*----*/
+					
+					
+				});	
+			
+			function checktoken(){
+			 	if(localStorage.getItem("token")==null){
+				 	mui.get('https://dc.1zdz.cn/root/gettoken.php',{},function(data){
+							//获得服务器响应
+							console.log(data.token);
+							mui.openWindow({ 
+						    url:"person.html",
+						    extras:{
+					    	"token":data.token
+						    }
+						  });
+						},'json'
+					);  
+					
+				 }
+			 }
+			function showvistor(){
+				mui.confirm("当前操作需登录，是否立即注册或登录？","提示",['否','是'],function(e){
+					if (e.index == 1){
+						checktoken();
+					}else{
+						mui.toast("未登录");
+					}
+				});
+			}
+		</script>
+	</body>
+ 
+</html> 

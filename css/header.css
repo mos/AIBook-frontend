@@ -1,0 +1,24 @@
+.myheader{
+	display: flex;
+	height: 50px; 
+	width: 100%;
+	box-shadow: 0 1px 1px rgba(153,153,153,100);
+}
+.myheader>div:nth-child(1){
+	flex: 1;
+	text-align: center;
+	padding-top: 15px;
+}
+.myheader>div:nth-child(2){
+	flex: 7;
+	text-align: left;
+	padding-left: 15px;
+	font-size: 20px;
+	padding-top: 13px;
+	font-family: "微软雅黑";
+	color: #383838;
+}
+.myheader>div:nth-child(1)>.iconfont{
+	font-size: 40px;
+	color: rgba(80,80,80,100);
+}

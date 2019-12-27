@@ -1,0 +1,448 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/header.css" />
+		<link rel="stylesheet" href="css/iconfont.css" />
+		<script type="text/javascript" src="js/echarts.common.min.js" ></script>
+		<style type="text/css">
+			body{
+				background-color: white;
+			}
+			.headsection{
+				display: flex;
+			}
+			.bingtu{
+				flex: 5;
+				height: 200px;
+			}
+			.headlist{
+				flex: 4;
+				padding-bottom: 30px;
+			}
+			.headlist>ul{
+				list-style-type: none;
+				padding-top: 25px;
+			    padding-left: 25%;
+			}
+			.headul>li:nth-child(3){
+				margin-top: 10px;
+			}
+			.headul>li:nth-child(2){
+				color: #FF4500;
+			}
+			.headul>li:nth-child(4){
+				color: #00a8f3;
+			}
+			.headul>li:nth-child(1),.headul>li:nth-child(3){
+				font-size: 13px;
+				color: dimgray;
+				font-family: "微软雅黑";
+			}
+			.headul>li:nth-child(2),.headul>li:nth-child(4){
+				font-size: 30px;
+				margin-top: 2px;
+			}
+			.headul>li:nth-child(2)::after,.headul>li:nth-child(4)::after{
+				content: "元";
+				margin-left: 2px;
+				font-size: 13px;
+				color: gray;
+			}
+			.tips{
+				background-color: whitesmoke;
+				text-align: center;
+				height: 30px;
+				font-size: 15px;
+				line-height: 30px;
+				font-style: italic;
+			}
+			.number{
+				color: #DAA520;
+				font-size: 17px;
+			}
+			.success{
+				color: #0ae147;
+			}
+			.primary{
+				color: #37a2da;
+			}
+			.danger{
+				color: #ef2d35;
+			}
+			.zhexian-title>.mui-btn, button, input[type=button], input[type=reset], input[type=submit]{
+				font-size: 12px;
+				letter-spacing: 2px;
+				font-weight: 400;
+				line-height: 1;
+				padding: 7px 14px;
+				background-color: #00a8f3;
+				border: 0px;
+				color: white;
+				border-bottom-right-radius: 0px;
+				border-top-right-radius: 0px;
+				border-top-left-radius: 12px;
+				border-bottom-left-radius: 12px;
+			}
+			.holder{
+				height: 10px;
+				background-color: whitesmoke;
+			}
+			.zhexian{
+				padding-bottom: 5px;
+			}
+			.zhexian-title{
+				padding:5px 0px;
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+			}
+			.zhexian-title>div:nth-child(1){
+				flex: 1;
+				padding-left: 3%;
+				color: darkslategray;
+				font-style: oblique;
+			}
+			.zhexian-title>div:nth-child(2){
+				flex: 1;
+			}
+			.zhexiantu{
+				width: 100%;
+				height: 250px;
+			}
+			
+			
+			.download{
+				padding: 30px 0px;
+				height: 100px;
+			}
+			.download>button{
+				width: 70%;
+				margin-left: 15%;
+				border-radius: 5%;
+				font-size: 17px;
+				height: 40px;
+				line-height: 10px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="myheader"> 
+			<div class="mui-action-back"> 
+				<i class="iconfont icon-jiantou_liebiaoxiangzuo"></i>
+			</div>
+			<div>图形数据</div>
+		</header>
+		<div class="headsection">
+			<div id="main" class="bingtu"></div>
+			<div class="headlist">
+				<ul class="headul">
+					<li>
+						消费总额
+					</li>
+					<li id="outcome" class="income">0</li>
+					<li>
+						计划内剩余
+					</li>
+					<li id="balance" class="balance">0</li>
+				</ul>
+			</div>
+		</div>  
+		<div class="tips">
+			本月记账
+			<span id="write" class="number">0</span>
+			笔,消费状态<span id="affordstate" class="success">良好</span>！
+		</div>
+		<div class="zhexian">
+			
+			<div class="zhexian-title">
+				<div>本月消费图</div>
+				<button id="duibi" type="button" class="mui-btn">对比</button>
+			</div>
+			<div id="main2" class="zhexiantu"></div>
+		</div>
+		<div class="holder"></div>
+		<div class="zhuzhuang">
+			<div class="zhexian-title">
+				<div>本月收支图</div>
+			</div>
+			<div id="main3" class="zhexiantu"></div>
+		</div>
+		<div style="height:1px;background-color: whitesmoke;"></div>
+		<div class="download">
+			<button id="dlexcel" type="button" class="mui-btn mui-btn-green mui-btn-block">查看Excel表格</button> 
+		</div>
+		
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			var nowtime = new Date();
+			var myChart1;
+			var option;
+			var myChart2;
+			var option2;
+			var myChart3;
+			var option3;
+			nowtime = nowtime.getFullYear() + "-" + ((nowtime.getMonth()+1)<10?"0"+(nowtime.getMonth()+1):(nowtime.getMonth()+1));
+			var lasttime;
+			console.log(nowtime);
+			var localmonthcost = [];
+			var localmonthin = [];
+			var lastmonthcost = [];
+			
+			
+
+			
+			
+			mui.plusReady(function(){
+				var localtoken = localStorage.getItem("token");
+				var localmonth = nowtime; 
+				/*ajax头部*/
+				mui.post('https://dc.1zdz.cn/root/consume/total.php',{
+						token:localtoken,
+						month:localmonth
+					},function(data){
+						//服务器返回响应，根据响应结果，分析是否登录成功；
+						if(data.code == 100){
+							var plan = data.data.plan;
+							var out = data.data.out;
+							var total = data.data.totals;
+							document.getElementById("outcome").innerHTML = out;
+							document.getElementById("balance").innerHTML = parseFloat(plan).toFixed(2)-parseFloat(out).toFixed(2);
+							document.getElementById("write").innerHTML = total;
+							/*饼图*/
+							myChart1 = echarts.init(document.getElementById('main'));
+							
+							option = {
+								color: ['#FF4500','#00a8f3'],
+							    series: [
+							        {
+							            name:'访问来源',
+							            type:'pie',
+							            radius: ['40%', '60%'],
+							            avoidLabelOverlap: false,
+							            label: {
+							                normal: {
+							                    show: false,
+							                    position: 'center'
+							                },
+							                emphasis: {
+							                    show: true,
+							                    textStyle: {
+							                        fontSize: '17',
+							                        fontWeight: 'bold'
+							                    }
+							                }
+							            },
+							            labelLine: {
+							                normal: {
+							                    show: false
+							                }
+							            },
+							            data:[
+							                {value:out, name:'消费'},
+							                {value:parseFloat(plan).toFixed(2)-parseFloat(out).toFixed(2), name:'余额'}
+							            ]
+							        }
+							    ]
+							};			
+							myChart1.setOption(option);
+							
+							/*结束*/
+							
+							
+							
+						}
+					},'json'
+				);
+				
+				
+				
+				/*--------*/
+				/*ajax部分*/
+				mui.post('https://dc.1zdz.cn/root/consume/month.php',{
+						token:localtoken,
+						month:localmonth
+					},function(data){
+					//服务器返回响应，根据响应结果，分析是否登录成功；
+						if(data.code == 100){
+							var i=1;
+							while(data.data[i]){
+								localmonthcost[i-1] = parseFloat(data.data[i].out).toFixed(2);
+								localmonthin[i-1] = parseFloat(data.data[i].in).toFixed(2);
+								i++;
+							}
+							console.log(localmonthcost[20]);
+							/*折线图*/
+							myChart2 = echarts.init(document.getElementById('main2'));
+							option2 = {
+								color: ['#FF4500','#00a8f3'],
+								legend: {
+							        data:['本月消费'] 
+							    },
+							    xAxis: {
+							        type: 'category',
+							        data: ['1', '2', '3', '4', '5', '6', '7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31']
+							    },
+							    yAxis: {
+							        type: 'value'
+							    },
+							    series: [{
+							    	name:"本月消费",
+							        data: localmonthcost,
+							        type: 'line',
+							        smooth: true
+							    },{
+							    	name:"上月消费",
+							        data: [],
+							        type: 'line',
+							        smooth: true
+							    }
+							    ]
+							};		
+							myChart2.setOption(option2);
+							/*结束*/
+							/*柱状图*/
+						    myChart3 = echarts.init(document.getElementById('main3'));
+							option3 = {
+							tooltip : {
+							    trigger: 'axis',
+							    axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+							        type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+							    }
+								},
+								legend: {
+								    data:["收入","支出"]
+								},
+								grid: {
+								    left: '3%',
+								    right: '4%',
+								    bottom: '3%',
+								    containLabel: true
+								},
+								xAxis : [
+								    {
+								        type : 'category',
+								        data :['1', '2', '3', '4', '5', '6', '7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31']
+								    }
+								],
+								yAxis : [
+								    {
+								        type : 'value'
+								    }
+								],
+								color: ['#FF4500','#00a8f3'],
+								series : [
+								    {
+								        name:'支出',
+								        type:'bar',
+								        data:localmonthcost
+								    },
+								    {
+								        name:'收入',
+								        type:'bar',
+								        data:localmonthin  
+							        }
+							    ]
+							};
+							myChart3.setOption(option3);
+							/*结束*/
+							
+						}
+					},'json'
+				);	
+				
+				var duibi = document.getElementById("duibi");
+				duibi.addEventListener('tap',function(){
+					var gettimes = new Date();
+					if(nowtime.substring(5,7)!="01"){
+						//真实写法//lasttime = gettimes.getFullYear() + "-" + ((gettimes.getMonth()+1)<10?"0"+(gettimes.getMonth()):(gettimes.getMonth()));
+						lasttime = "2019-01";
+					}else{
+						lasttime = (gettimes.getFullYear()-1) + "-12";
+					}
+					
+					
+					mui.post('https://dc.1zdz.cn/root/consume/month.php',{
+						token:localtoken,
+						month:lasttime
+					},function(data){
+					//服务器返回响应，根据响应结果，分析是否登录成功；
+						if(data.code == 100){
+							var i=1;
+							while(data.data[i]){
+								lastmonthcost[i-1] =  parseFloat(data.data[i].out).toFixed(2);
+								i++;
+							}
+							console.log(lastmonthcost[20]);
+							/*折线图*/
+							myChart2 = echarts.init(document.getElementById('main2'));
+							option2 = {
+								color: ['#FF4500','#00a8f3'],
+								legend: {
+							        data:['本月消费','上月消费']
+							    },
+							    xAxis: {
+							        type: 'category',
+							        data: ['1', '2', '3', '4', '5', '6', '7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31']
+							    },
+							    yAxis: {
+							        type: 'value'
+							    },
+							    series: [{
+							    	name:"本月消费",
+							        data: localmonthcost,
+							        type: 'line',
+							        smooth: true
+							    },{
+							    	name:"上月消费",
+							        data: lastmonthcost,
+							        type: 'line',
+							        smooth: true
+							    }
+							    ]
+							};		
+							myChart2.setOption(option2);
+							/*结束*/
+							
+							
+							
+							
+							
+							
+							
+						}
+					},'json'
+				);	
+					
+					
+				});
+				
+				
+				var dlexcel = document.getElementById("dlexcel"); 
+				dlexcel.addEventListener('tap',function(){
+					var dtask =  plus.downloader.createDownload('https://dc.1zdz.cn/root/consume/excel.php?month='+nowtime+'&token='+localtoken,
+					{}, function(d, status){
+						// 下载完成
+						if(status == 200){console.log("Download success: " + d.filename);
+							plus.runtime.openFile( d.filename, {}, function (e) {console.log('打开失败');}); 
+						}
+					});
+					dtask.start(); 
+				});	
+				
+				
+				
+			})
+			
+			
+			
+		</script>
+	</body>
+
+</html>

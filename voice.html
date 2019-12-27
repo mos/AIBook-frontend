@@ -1,0 +1,197 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/header.css" />
+		<link rel="stylesheet" href="css/iconfont.css" />
+		<style type="text/css">
+			body{
+				background-color: white;
+			}
+			.line{
+				margin-top: 70px;
+    		width: 96%;
+    		margin-left: 2%;
+    		height: 30px;
+    	}
+    	.lines{
+    		width: 100%;
+    		height: 15px;
+    		border-bottom: 1px solid rgba(153,153,153,100);
+    	}
+    	.words{
+    		font-size: 19px;
+    		font-family: "微软雅黑";
+    		text-align: center;
+    		padding-top: 5px;
+    		width: 46%;
+    		margin-left: 27%;
+    		background-color: white;
+    		color: rgba(80,80,80,100);
+    	}
+    	/*result*/
+    	.result{
+    		margin-top: 60px;
+    	}
+    	.resultcontent{
+    		margin: 0 auto;
+    		width: intrinsic;
+    		padding-bottom: 2px;
+    		border-bottom: 1px solid rgba(153,153,153,100);
+    		font-size: 17px;
+    		
+    	}
+    	.resultcontent>span{
+    		border-radius: 17px;
+    		padding: 1px 2px;
+    		color: white;
+    		background-color: rgba(0,157,146,100);
+    	}
+    	.buttongroup{
+    		position: fixed;
+    		text-align: center;
+    		bottom: 30px;
+    		width: 100%;
+    	}
+    	.buttongroup>button{
+    		background-color: rgba(0,157,146,100);
+    	}
+    	.buttongroup>button:nth-child(1){
+    		width: 50px;
+    		height: 50px;
+    		margin-top: 15px;
+    		margin-right: 10px;
+    		border-radius: 80px;
+    	}
+    	.buttongroup>button:nth-child(2){
+    		width: 80px;
+    		height: 80px;
+    		border-radius: 100px;
+    	}
+    	.buttongroup>button:nth-child(3){
+    		width: 50px;
+    		height: 50px;
+    		margin-top: 15px;
+    		margin-left: 10px;
+    		border-radius: 80px;
+    	}
+    	.buttongroup>button:nth-child(2)>.iconfont{
+    		font-size: 40px;
+    		color: white;
+    	}
+    	.buttongroup>button:nth-child(1)>.iconfont{
+    		font-size: 25px;
+    		color: white;
+    	}
+    	.buttongroup>button:nth-child(3)>.iconfont{
+    		font-size: 25px;
+    		color: white;
+    	}
+		</style>
+	</head>
+
+	<body>
+		<header class="myheader"> 
+			<div class="mui-action-back"> 
+				<i class="iconfont icon-jiantou_liebiaoxiangzuo"></i>
+			</div>
+			<div>语音</div>
+		</header>
+		<div class="line">
+			<div class="lines">
+				<div id="words" class="words">请开始语音</div>
+			</div>
+		</div>
+		<div class="result">
+			<div class="resultcontent">
+				.........................
+				<span><i class="iconfont icon-bianji"></i></span>
+			</div>
+		</div>
+		<div class="buttongroup">
+			<button><i class="iconfont icon-chexiao"></i></button>
+			<button><i id="yuyin" class="iconfont icon-yuyin"></i></button>
+			<button><i class="iconfont icon-shangchuan"></i></button>
+			</div>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript" src="js/gettime.js" ></script>
+		<script src="js/audio.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			
+			document.addEventListener( "plusready", onPlusReady, false );
+			var r = null; 
+			// 扩展API加载完毕，现在可以正常调用扩展API 
+			function onPlusReady() { 
+				r = plus.audio.getRecorder(); 
+			}
+			function longtaps(){
+			var ele = document.getElementById("yuyin");
+			var react = document.getElementById("words");
+			var uploadurl = "";
+			var returnurl = "";
+			ele.addEventListener('touchstart',function(){
+				
+				  react.innerHTML="正在录音...";
+				  //ajax 传值
+				  var time = gettime();
+				  returnurl="_doc/audio/"+13124252055+time;
+				 	startRecord("13124252055",time);
+				 	if(returnurl!=0){
+				 		uploadurl = returnurl + ".amr";
+				 		console.log(uploadurl);  
+				 	}else{
+				 		return;
+				 	}
+				  /*==================================*/
+				 	
+				  /*==================================*/
+				  
+			});
+			
+			function createUpload(uploadurl) { 
+				console.log("ss:"+uploadurl);
+			var task = plus.uploader.createUpload( "https://dc.1zdz.cn/api/root/analyzevoice.php", 
+				{ method:"POST",blocksize:204800,priority:100 },
+				function (t, status) {
+					// 上传完成
+					var react = document.getElementById("words");
+					var data = JSON.parse(t.responseText);
+					console.log(data.data.thing+" "+data.data.money+" "+data.data.type+" "+data.data.time); 
+					/*if ( status == 200 ) {
+						console.log(t.url);
+					} else {
+						react.innerHTML=t.state; 
+					}*/
+				}
+			);
+			task.addFile( uploadurl, {key:"uservoice"} );
+			task.addData( "user", "仲昊" );
+			//task.addEventListener( "statechanged", onStateChanged, false );
+			task.start();
+		}	
+			
+			
+			ele.addEventListener("touchend",function(){
+					react.innerHTML="语音结束";
+						stopRecord();
+						createUpload(uploadurl);
+				})
+		}
+			
+			
+			
+		
+			
+			
+		longtaps();
+			
+		</script>
+	</body>
+
+</html>

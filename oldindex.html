@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <script src="js/mui.min.js"></script>
+    <link href="css/mui.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="css/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="css/header.css"/>
+    <link rel="stylesheet" type="text/css" href="css/color.css"/>
+    <style type="text/css">
+    	
+    	.mui-content{
+    		background-color: white;
+    	} 
+    	.placeholder{
+    		height: 10px;
+    		background-color: gainsboro;
+    	}
+    	/*顶部导航*/
+    	header{
+    		width: 100%;
+    		height: 50px;
+    		display: flex;
+    		border-bottom: 1px solid rgba(153,153,153,49);
+    	}
+    	.mui-bar{
+    		height: 50px;
+    		background-color: white;
+    	}
+    	header>div{
+    		height: inherit;
+    		text-align: center;
+    		padding-top: 16px;
+    	}
+    	header>div:nth-child(1){
+
+    		flex: 2;    		
+    	}
+    	header>div:nth-child(2){
+    		flex: 7;
+    	}
+    	header>div:nth-child(3){
+    		flex: 2;
+    	}
+    	.iconfont{
+    		font-size: 27px;
+    		color: rgba(64,64,63,100);
+    	}
+    	/*侧滑菜单*/
+    	.mui-off-canvas-left{
+    		background-color: white;
+    	}
+    	.lefthead{
+    		margin-top: 30px;
+    		width: 24%;
+    		height: 100px;
+    		margin-left: 38%;
+    		margin-bottom: 70px;
+    		text-align: center;
+    	}
+    	.image{
+    		margin-bottom: 10px;
+    		border: 1px solid rgba(153,153,153,100);
+    		border-radius: 100px;
+    		overflow: hidden;
+    	}
+    	.image>img{
+    		width: 100%;
+    	}
+    	.name{
+    		font-family: "微软雅黑";
+    		font-size: 14px;
+    		letter-spacing: 1px;
+    		color: rgba(80,80,80,100);
+    	}
+    	.leftcell{
+    		margin: 20px 0;
+    		height: 30px;
+    	}
+    	.lefticon{
+    		float: left;
+    		text-align: right;
+    		width: 30%;
+    	}
+    	.lefttitle{
+    		float: left;
+    		text-align: center;
+    		width: 50%;
+    		font-size: 14px;
+    		color: rgba(80,80,80,100);
+    	}
+    	/*广告*/
+    	.adv{
+    		margin-top: 7px;
+    		width: 100%;
+    		height: 65px;
+    		background-color: gainsboro;
+    		
+    	}
+    	.adv>img{
+    		height: 57px;
+    		width: 100%;
+    	}
+    	.cost{
+    		width: 100%;
+    		height: 130px;
+    		text-align: center;
+    		padding-left: 13px;
+    		padding-top: 50px;
+    	}
+    	.number{
+    		text-align: center;
+    		font-size: 60px;
+    		color: rgba(80,80,80,100);
+    	}
+    	.unit{
+    		font-size: 15px;
+    		border-radius: 20px;
+    		color: white;
+    		padding: 3px 5px; 
+    		background-color: rgba(0,157,146,100);
+    		
+    	}
+    	/*消费线*/
+    	.line{
+    		width: 90%;
+    		margin-left: 5%;
+    		height: 30px;
+    	}
+    	.lines{
+    		width: 100%;
+    		height: 15px;
+    		border-bottom: 1px solid rgba(153,153,153,100);
+    	}
+    	.words{
+    		font-size: 13px;
+    		letter-spacing: 2px;
+    		text-align: center;
+    		padding-top: 5px;
+    		width: 24%;
+    		margin-left: 38%;
+    		background-color: white;
+    		color: rgba(153,153,153,100);
+    	}
+    	/*主页按钮*/
+    	.buttons{
+    		display: flex;
+    		margin: 5px 0px;
+    		height: 100px;
+    		width: 100%;
+    	}
+    	.cell{
+    		flex: 1;
+    		height: 100%;
+    		padding-top: 25px;
+    		text-align: center;
+    	}
+    	.cell>div:nth-child(1)>.iconfont{
+    		font-size: 65px;
+    		color: rgba(0,157,146,100);
+    	}
+    	.cell>div:nth-child(2){
+    		font-size: 14px;   		
+    	}
+    	.costtitle{
+    		height: 40px;
+    		width: 100%;
+    		padding-top: 10px;
+    		padding-left: 7px;
+    		font-size: 15px;
+    		border-bottom: 1px solid rgba(153,153,153,100);
+    	}
+    	.mui-table-view-cell>span:nth-child(1){
+    		padding-right: 20px;
+    	}
+    	.zhanyong{
+    		height: 90px;
+    	}
+    	.mui-off-canvas-left{
+    		z-index: 3;
+    	}
+    	.mainbutton{
+    		position: fixed;
+    		z-index: 2;
+    		width: 100%;
+    		text-align: center;
+    		bottom: 0px;
+    		width: 130px;
+    		height: 60px;
+    		left: 50%;
+    		bottom: 20px;
+    		margin-left: -65px;
+    		border-radius: 60px;
+    		background-color: rgba(0,157,146,100);
+    	}
+    	.mainbutton>button{
+    		background-color: rgba(0,157,146,100);
+    		width: 60px;
+    		height: 60px;
+    		border: 0px;
+    		margin-bottom: 15px;
+    		border-radius: 60px;
+    		/*box-shadow: 0px 0px 3px grey;*/
+    	}
+    	.mainbutton>button>.iconfont{
+    		color: white;
+    	}
+    	.remove{
+    		display: none;
+    	}
+    </style>
+</head>
+<body>
+	
+	<div class="mui-off-canvas-wrap mui-draggable mui-slide-in">
+	  <!-- 菜单容器 -->
+	  <aside class="mui-off-canvas-left">
+	    <div id="offCanvasSideScroll" class="mui-scroll-wrapper">
+	      <div class="mui-scroll">
+	        <!-- 菜单具体展示内容 -->
+	        	<div class="lefthead">
+	        		<div class="image">
+	        			<img src="image/2b42a5bd265a513ebc938d999d95b22d.jpeg" alt="" />
+	        		</div>
+	        		<div class="name">
+	        			仲昊
+	        		</div>
+	        	</div>
+	        	<div class="leftcell" id="user">
+	        		<div class="lefticon">
+	        			<i class="iconfont icon-gerentouxiang"></i>
+	        		</div>
+	        		<div class="lefttitle">
+	        			用户
+	        		</div>
+	        	</div>
+	        	<div class="leftcell" id="product">
+	        		<div class="lefticon">
+	        			<i class="iconfont icon-jieshaoxinxi"></i>
+	        		</div>
+	        		<div class="lefttitle">
+	        			产品信息
+	        		</div>
+	        	</div>
+	        	<div class="leftcell" id="direction">
+	        		<div class="lefticon">
+	        			<i class="iconfont icon-tishi"></i>
+	        		</div>
+	        		<div class="lefttitle">
+	        			使用说明
+	        		</div>
+	        	</div>
+	        	<div class="leftcell" id="setting">
+	        		<div class="lefticon">
+	        			<i class="iconfont icon-quanjushezhi"></i>
+	        		</div>
+	        		<div class="lefttitle">
+	        			设置
+	        		</div>
+	        	</div>
+	      </div>
+	    </div>
+	  </aside>
+	  <!-- 主页面容器 -->
+	  <div class="mui-inner-wrap">
+	    <!-- 主页面标题 -->
+	    
+	    <header class="mui-bar mui-bar-nav">
+	      <div id="callmenu" class="mui-action-menu"> 
+					<i class="iconfont icon-xinzengdaohangliebiao"></i>
+				</div>
+				<div>
+					<p class="fontcolor">2019年7月23日</p>
+				</div>
+				<div>
+					<i class="iconfont icon-tongzhizhongxin"></i>
+				</div>
+	    </header>
+	    <div id="offCanvasContentScroll" class="mui-content mui-scroll-wrapper">
+	    	
+	    	<div class="mainbutton" id="mainbutton">
+	    		<!--
+	    			<button id="add">
+						<i class="iconfont icon-jiahao"></i>
+					</button>
+                	
+                -->
+					
+					<button id="voice" class="">
+						<i class="iconfont icon-yuyin"></i>
+					</button>
+					<button id="keyboard" class="">
+						<i class="iconfont icon-jianpan"></i>
+					</button>
+				</div>
+					
+	      <div class="mui-scroll">
+	        <!-- 主界面具体展示内容 -->
+	        <div class="adv">
+						<img alt="" src="image/ivwjchdnqqi.jpg" />
+					</div>
+					<div class="cost">
+						<span class="number">23579</span>
+						<span class="unit">元</span> 							
+					</div>
+					<div class="line">
+						<div class="lines">
+							<div class="words">今日消费</div>
+						</div>
+					</div>
+					<div class="buttons">
+						<div class="cell">
+							<div>
+								<i class="iconfont icon-zhuzhuangtu"></i>
+							</div>
+							<div>查看报表</div>
+						</div>
+						<div class="cell">
+							<div>
+								<i class="iconfont icon-bianji"></i>
+							</div>
+							<div>设置预算</div>
+						</div>
+						<div class="cell">
+							<div>
+								<i class="iconfont icon-liebiao"></i>
+							</div>
+							<div>明细详情</div>
+						</div>
+						<div class="cell">
+							<div>
+								<i class="iconfont icon-yun"></i>
+							</div>
+							<div>理财资讯</div>
+						</div>
+					</div>
+					<div class="placeholder"></div>
+					<div class="costlist">
+						<div class="costtitle">
+							消费明细
+						</div>
+						<div class="listitem">
+							<ul class="mui-table-view">
+						    <li class="mui-table-view-cell">
+						    	<span>支出</span>
+						    	<span>57元</span>
+						    </li>
+						    <li class="mui-table-view-cell">
+						    	<span>支出</span>
+						    	<span>下午买风扇花了153元</span>
+						    </li>
+						    <li class="mui-table-view-cell">
+						    	<span>收入</span>
+						    	<span>晚上卖报纸挣了26元</span>
+						    </li> 
+							</ul>
+							<div class="zhanyong"></div>
+						</div>
+					</div>
+					
+	      </div>
+	    </div>  
+	  </div>
+	</div> 
+	
+	
+	
+	
+	
+	<script type="text/javascript" charset="utf-8">
+    mui.init();
+    /*(function($, doc) { 
+				    window.addEventListener('refresh', function(e) {
+				        //执行刷新
+				        console.log("刷新父页面");
+				        location.reload();
+				    });
+				})(mui, document);*/
+    
+    mui.plusReady(function(){
+		   	
+
+    	mui('#offCanvasSideScroll').scroll();  
+			mui('#offCanvasContentScroll').scroll();
+			
+			var callmenu = document.getElementById("callmenu");
+			callmenu.addEventListener('tap',function(){
+				mui('.mui-off-canvas-wrap').offCanvas('show');
+			});			
+			var isClick = false;
+			var count = 1;
+			var add = document.getElementById("add");
+			var voice = document.getElementById("voice");
+			var keyboard = document.getElementById("keyboard");
+		/*	add.addEventListener('tap',function(){
+				isClick = false;
+				count = 1;
+				add.className="remove";
+				voice.className="";
+				keyboard.className="";
+				var t = setInterval(function(){
+			  	if(count<=10&&isClick==false){
+			  		count++;
+			  	}else{
+			  		add.className="";
+					voice.className="remove";
+					keyboard.className="remove";
+			  		clearInterval(t);
+			  	}			  	
+				},200); 
+			});*/
+			voice.addEventListener('tap',function(){
+				isClick = true;
+			});
+			keyboard.addEventListener('tap',function(){
+				isClick = true;
+			});
+		});
+		
+		
+		function leftrun(title){
+			var username = "13124252055";
+			var password = "a13124252055";
+			mui.openWindow({
+			    url:title+".html",
+			    id:title,
+			    extras:{
+			    	"unm" : username,
+			    	"pwd" : password
+			      //自定义扩展参数，可以用来处理页面间传值
+			    },
+			    createNew:true,//是否重复创建同样id的webview，默认为false:不重复创建，直接显示
+			    show:{
+			      autoShow:true,//页面loaded事件发生后自动显示，默认为true
+			      aniShow:"slide-in-right",//页面显示动画，默认为”slide-in-right“；
+			      duration:100//页面动画持续时间，Android平台默认100毫秒，iOS平台默认200毫秒；
+			    },
+			    waiting:{
+			      autoShow:true,//自动显示等待框，默认为true
+			      title:'正在加载...',//等待对话框上显示的提示内容
+			      options:{
+			        width:"100px",//等待框背景区域宽度，默认根据内容自动计算合适宽度
+			        height:"100px",//等待框背景区域高度，默认根据内容自动计算合适高度
+			      }
+			    }
+				})
+		}
+		var user = document.getElementById("user");
+		var product = document.getElementById("product");
+		var direction = document.getElementById("direction");
+		var setting = document.getElementById("setting");
+		
+		user.addEventListener('tap',function(){
+			leftrun("user");
+		});
+		product.addEventListener('tap',function(){
+			leftrun("product");
+		});
+		direction.addEventListener('tap',function(){
+			leftrun("direction");
+		});
+		setting.addEventListener('tap',function(){
+			leftrun("setting");
+		});
+		
+		var cells = document.getElementsByClassName("cell");
+		cells[0].addEventListener('tap',function(){
+			leftrun("charts");
+		});
+		cells[1].addEventListener('tap',function(){
+			leftrun("budget");
+		});
+		cells[2].addEventListener('tap',function(){
+			leftrun("detail");
+		});
+		cells[3].addEventListener('tap',function(){
+			leftrun("information");
+		});
+		
+  </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+{
+  "index.html": {
+    "refer": [
+      "budget.html",
+      "detail.html",
+      "user.html",
+      "product.html",
+      "direction.html",
+      "setting.html",
+      "person.html",
+      "charts.html",
+      "information.html",
+      "revise.html"
+    ]
+  },
+  "information.html": {
+    "refer": [
+      "news/4000.html",
+      "news/1000.html",
+      "news/3000.html"
+    ]
+  },
+  "news/1000.html": {
+    "refer": [
+      "information.html"
+    ]
+  },
+  "news/4000.html": {
+    "refer": [
+      "information.html"
+    ]
+  },
+  "news/3000.html": {
+    "refer": [
+      "information.html"
+    ]
+  },
+  "setting.html": {
+    "refer": [
+      "feedback.html",
+      "index.html",
+      "person.html"
+    ]
+  },
+  "revise.html": {
+    "refer": [
+      "person.html"
+    ]
+  },
+  "person.html": {
+    "refer": [
+      "index.html"
+    ]
+  }
+}

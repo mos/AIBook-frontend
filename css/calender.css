@@ -1,0 +1,132 @@
+.icon-jiantou_xiangzuoliangci{
+	font-size: 24px;
+}
+.icon-jiantou_xiangyouliangci{
+	font-size: 24px;
+}
+/* 整体设置 */
+*{margin:0px;padding:0px;}
+ 
+/**
+ * 设置日历的大小
+ */
+.calendar{
+	width: 90%;
+	height: auto;
+	display: block;
+}
+/**
+ * 设置日历顶部盒子
+ */
+.calendar .calendar-title-box{
+	position: relative;
+	width: 100%;
+	height: 45px;
+	line-height: 50px;
+	text-align: center;
+	font-size: 20px;
+	letter-spacing: 2px;
+	border-bottom: 2px solid #ddd;
+}
+/**
+ * 设置上个月的按钮图标
+ */
+.calendar .prev-month{
+  position: absolute;
+  left: 40px;
+  top: 16px;
+  display: inline-block;
+  width: 0px;
+  height: 0px;
+  border-left: 0px;
+  border-top: 9px solid transparent;
+  border-right: 12px solid #999;
+  border-bottom: 9px solid transparent;
+}
+.prev-year{
+	position: absolute;
+	top: 1px;
+	left: 10px;
+	display: inline-block;
+}
+/**
+ * 设置下个月的按钮图标
+ */
+
+.calendar .next-month {
+  position: absolute;
+  top: 16px;
+  right: 40px;
+  display: inline-block;
+  width: 0px;
+  height: 0px;
+  border-right: 0px;
+  border-top: 9px solid transparent;
+  border-left: 12px solid #999;
+  border-bottom: 9px solid transparent;
+}
+
+.next-year{
+	position: absolute;
+	top: 1px;
+	right: 10px;
+	display: inline-block;
+} 
+.next-year>.iconfont,.prev-year>.iconfont{
+	color: gray;
+}
+/* 设置日历表格样式 */
+.calendar-table{
+  width: 100%;
+  border-collapse: collapse;
+  text-align:center;
+}
+ 
+/* 表格行高 */
+/*
+.calendar-table tr{
+  height: 30px;
+  line-height: 30px;
+}
+ */
+.layer,.layer-one{
+	height: 45px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+}
+.layer-one{
+	font-size: 20px;
+	font-family: "微软雅黑";
+}
+.layer>div{
+	 height: 45px;
+	 width: 45px;
+	 line-height: 45px;
+	 text-align: center;
+	 font-size: 18px;
+}
+
+/* 当前天 颜色特殊显示 */
+.currentDay {
+  color: white;
+  border-radius: 50%;
+  background-color: darkgray;
+}
+ 
+/* 本月 文字颜色 */
+.currentMonth {
+  color: #383838;
+}
+ 
+/* 其他月颜色 */
+.otherMonth{
+  color: gray;
+}
+/* 点击后月份颜色 */
+.isclicked{
+	color: white;
+	background-color: #383838;
+	border-radius: 50%;
+	background-color: rgba(0,157,146,100);
+}

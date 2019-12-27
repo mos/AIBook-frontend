@@ -1,0 +1,1056 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <script src="js/mui.min.js"></script>
+    <link href="css/mui.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="css/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="css/header.css"/>
+    <link rel="stylesheet" type="text/css" href="css/color.css"/>
+    <style type="text/css">
+    	
+    	.mui-content{
+    		background-color: white;
+    	} 
+    	.placeholder{
+    		height: 1px;
+    		background-color: gainsboro;
+    	}
+    	/*顶部导航*/
+    	header{
+    		width: 100%;
+    		height: 50px;
+    		display: flex;
+    		border-bottom: 1px solid gainsboro;
+    	}
+    	.mui-bar{
+    		height: 50px;
+    		background-color: white;
+    	}
+    	header>div{
+    		height: inherit;
+    		text-align: center;
+    		padding-top: 16px;
+    	}
+    	header>div:nth-child(1){
+
+    		flex: 2;    		
+    	}
+    	header>div:nth-child(2){
+    		flex: 7;
+    	}
+    	header>div:nth-child(3){
+    		flex: 2;
+    	}
+    	.iconfont{
+    		font-size: 27px;
+    		color: rgba(64,64,63,100);
+    	}
+    	/*侧滑菜单*/
+    	.mui-off-canvas-left{
+    		background-color: white;
+    	}
+    	.lefthead{
+    		margin-top: 30px;
+    		width: 24%;
+    		height: 100px;
+    		margin-left: 38%;
+    		margin-bottom: 70px;
+    		text-align: center;
+    	}
+    	.image{
+    		margin-bottom: 10px;
+    		border: 1px solid rgba(153,153,153,100);
+    		border-radius: 100px;
+    		overflow: hidden;
+    	}
+    	.image>img{
+    		width: 100%;
+    	}
+    	.name{
+    		font-family: "微软雅黑";
+    		font-size: 14px;
+    		letter-spacing: 1px;
+    		color: rgba(80,80,80,100);
+    	}
+    	.leftcell{
+    		margin: 20px 0;
+    		height: 30px;
+    	}
+    	.lefticon{
+    		float: left;
+    		text-align: right;
+    		width: 30%;
+    	}
+    	.lefttitle{
+    		float: left;
+    		text-align: center;
+    		width: 50%;
+    		font-size: 14px;
+    		color: rgba(80,80,80,100);
+    	}
+    	.cost{
+    		width: 100%;
+    		height: 130px;
+    		text-align: center;
+    		padding-left: 13px;
+    		padding-top: 50px;
+    		/*border-bottom: 1px solid gainsboro;*/
+    	}
+    	.number{
+    		text-align: center;
+    		font-size: 60px;
+    		color: rgba(80,80,80,100);
+    	}
+    	.unit{
+    		font-size: 15px;
+    		border-radius: 20px;
+    		color: white;
+    		padding: 3px 5px; 
+    		background-color: rgba(33,150,243,100);
+    		
+    	}
+    	/*消费线*/
+    	.line{
+    		width: 90%;
+    		margin-left: 5%;
+    		height: 30px;
+    	}
+    	.lines{
+    		width: 100%;
+    		height: 15px;
+    		border-bottom: 1px solid rgba(153,153,153,100);
+    	}
+    	.words{
+    		font-size: 13px;
+    		letter-spacing: 2px;
+    		text-align: center;
+    		padding-top: 5px;
+    		width: 24%;
+    		margin-left: 38%;
+    		background-color: white;
+    		color: rgba(153,153,153,100);
+    	}
+    	/*主页按钮*/
+    	.buttons{
+    		display: flex;
+    		margin: 5px 0px;
+    		height: 50px;
+    		width: 100%;
+    	}
+    	.cell{
+    		flex: 1;
+    		height: 100%;
+    		padding-top: 3px;
+    		text-align: center;
+    	}
+    	.cell>div:nth-child(1)>.iconfont{
+    		font-size: 30px;
+    		color: #383838;
+    	}
+    	.cell>div:nth-child(2){
+    		font-size: 12px;   		
+    	}
+    	.costtitle{
+    		height: 40px;
+    		width: 100%;
+    		padding-top: 10px;
+    		padding-left: 7px;
+    		font-size: 15px;
+    		border-bottom: 1px solid rgba(33,150,243,100);
+    	}
+    	.mui-table-view-cell>span:nth-child(1){
+    		padding-right: 20px;
+    	}
+    	.zhanyong{
+    		height: 90px;
+    	}
+    	.mui-off-canvas-left{
+    		z-index: 3;
+    	}
+    	.mainbutton{
+    		position: fixed;
+    		z-index: 2;
+    		width: 100%;
+    		text-align: center;
+    		bottom: 0px;
+    		width: 130px;
+    		height: 60px;
+    		left: 50%;
+    		bottom: 20px;
+    		margin-left: -65px;
+    		border-radius: 60px;
+    		box-shadow: 0px 0px 3px gray;
+    		background-color: rgba(33,150,243,100);
+    	}
+    	.mainbutton>button{
+    		background-color: rgba(33,150,243,100);
+    		width: 60px;
+    		height: 60px;
+    		border: 0px;
+    		margin-bottom: 15px;
+    		border-radius: 60px;
+    		/*box-shadow: 0px 0px 3px grey;*/
+    	}
+    	.mainbutton>button>.iconfont{
+    		color: white;
+    	}
+    	.remove{
+    		display: none;
+    	}
+    	@keyframes btnshow{ 
+    		from{bottom: -100px;}
+    		to{bottom: 10px;}
+    	}
+    	@keyframes btnhidden{
+    		from{bottom: 10px;}
+    		to{bottom: -100px;}
+    	}
+    	@keyframes inputshow{ 
+    		from{bottom: -100px;}
+    		to{bottom: 0px;}
+    	}
+    	@keyframes inputhidden{
+    		from{bottom: 0px;}
+    		to{bottom: -100px;}
+    	}
+    	.thevoice{
+    		position: fixed;
+    		width: 100%;
+    		z-index: 2;
+    		text-align: center;
+    		bottom: -100px;
+    		height: 80px;
+    	}
+    	.theinput{
+    		position: fixed;
+    		width: 100%;
+    		z-index: 2;
+    		bottom: -100px;
+    		min-height: 55px;
+    		padding-top: 10px;
+    		padding-bottom: 10px;
+    		border-top: 1px solid gainsboro;
+    		background-color: white;
+    		display: flex;
+    	}
+    	.btnshow{
+    		animation-name:btnshow;
+    		animation-fill-mode: forwards;
+    		animation-duration: .5s;
+    	}
+    	.btnhidden{
+    		animation-name:btnhidden;
+    		animation-fill-mode: forwards;
+    		animation-duration: .5s;
+    	}
+    	.inputshow{
+    		animation-name:inputshow;
+    		animation-fill-mode: forwards;
+    		animation-duration: .5s;
+    	}
+    	.inputhidden{
+    		animation-name:inputhidden;
+    		animation-fill-mode: forwards;
+    		animation-duration: .5s;
+    	}
+    	.thevoice>button{
+    		width: 80px;
+    		height: 80px;
+    		box-shadow: 0 0 2px gray;
+    		border-radius: 80px;
+    		border: 0px;
+    		background-color: rgba(33,150,243,100);
+    	}
+    	.thevoice>button>.iconfont{
+    		font-size: 35px;
+    		color: white;
+    	}
+    	.theinput>input{
+    		flex: 8;
+    		min-height: 35px;
+    		margin-left: 5px;
+    	  margin-right: 5px;
+    	  border: 0;
+    	  border-bottom: 1px solid gainsboro;
+    	}
+    	.submit{
+    		flex: 1;
+    		height: 35px;
+    		margin-right: 10px;
+    		border-radius: 7px;
+    	}
+    	.return{
+    		flex: 1;
+    		margin-left: 10px;
+    		border-radius: 100%;
+    	}
+    	.return>button{
+    		width: 35px;
+    		height: 35px;
+    		border-radius: 35px;
+   			padding: 0;
+    	}
+    	.return>button>.iconfont{
+    		font-size: 20px;
+    		
+    	}
+    	/*小管家画布*/
+    	.canvascontainer{
+    		width: 96%;
+    		display: flex;
+    		margin-top: 10px;
+    		margin-left: 2%;
+    		height: 420px;
+    	}
+    	.canvasleft{
+    		flex: 1;
+    		height: 320px;
+    		background-color: white;
+    		border-bottom-left-radius: 15px;
+    		border-top-left-radius: 15px;
+    		border: 1px solid whitesmoke;
+    		border-right: 0px;
+    		display: flex;
+    		flex-direction: column;
+    	}
+    	.canvasright{
+    		flex: 3;
+    		height: 320px;
+    		background-color: rgba(248,248,248,100);
+    		border-bottom-right-radius: 15px;
+    		border-top-right-radius: 15px;
+    		border: 1px solid whitesmoke;
+    		border-left: 0px;
+    	}
+    	.head{
+    		flex: 2;
+    		width: 100%;
+    	}
+    	.canvasleft>.cell{
+    		flex: 1;
+    	}
+    	.photocontent{
+    		width: 70px;
+    		height: 70px;
+    		margin: 15px auto;
+    		border-radius: 70px;
+    		overflow: hidden;
+    		border:1px solid rgba(33,150,243,100);
+    	}
+    	.photocontent>img{
+    		width: 70px;
+    		height: 70px;
+    	}
+    	/*对话框*/
+    	.trangle{
+    		float: left;
+				width: 0;
+				height: 0;
+				margin-top: 40px;
+				margin-left: 5px;
+				border-top: 2px solid rgba(33,150,243,100);
+				border-left: 10px solid transparent;
+				border-bottom: 7px solid transparent;
+				border-right: 13px solid rgba(33,150,243,100);
+    	}
+    	.text-content{
+    		float: left;
+    		margin-top: 30px;
+    		min-width:70px;
+    		max-width: 80%;
+    		min-height: 50px;
+    		max-height: 300px;
+    		border-radius: 14px;
+    		padding: 15px;
+    		word-break: break-all;
+    		background-color: rgba(33,150,243,100);
+    		color: white;
+    	}
+    	.text-content>div{
+    		margin: 10px;
+    		text-align: center;
+    	}
+    	.text-content>div>button{
+    		border-radius: 15px;
+    		border: 0px;
+    		color: white;
+    	}
+    	.text-content>div>button:nth-child(1){
+    		background-color: #4cd964;
+    	}
+    	.text-content>div>button:nth-child(2){
+    		background-color: #f0ad4e;
+    	}
+    </style>
+</head>
+<body>
+	
+	<div class="mui-off-canvas-wrap mui-draggable mui-slide-in">
+	  <!-- 菜单容器 -->
+	  <aside class="mui-off-canvas-left">
+	    <div id="offCanvasSideScroll" class="mui-scroll-wrapper">
+	      <div class="mui-scroll">
+	        <!-- 菜单具体展示内容 -->
+	        	<div class="lefthead">
+	        		<div class="image">
+	        			<img src="image/default.png" alt="" />
+	        		</div>
+	        		<div class="name" id="show_u_name">
+	        			游客
+	        		</div>
+
+	        	</div>
+	        	<div class="leftcell" id="user">
+	        		<div class="lefticon">
+	        			<i class="iconfont icon-gerentouxiang"></i>
+	        		</div>
+	        		<div class="lefttitle">
+	        			用户
+	        		</div> 
+	        	</div>
+	        	<div class="leftcell" id="product">
+	        		<div class="lefticon">
+	        			<i class="iconfont icon-jieshaoxinxi"></i>
+	        		</div>
+	        		<div class="lefttitle">
+	        			产品信息
+	        		</div>
+	        	</div>
+	        	<div class="leftcell" id="direction">
+	        		<div class="lefticon">
+	        			<i class="iconfont icon-tishi"></i>
+	        		</div>
+	        		<div class="lefttitle">
+	        			使用说明
+	        		</div>
+	        	</div>
+	        	<div class="leftcell" id="setting">
+	        		<div class="lefticon">
+	        			<i class="iconfont icon-quanjushezhi"></i>
+	        		</div>
+	        		<div class="lefttitle">
+	        			设置
+	        		</div>
+	        	</div>
+	      </div>
+	    </div>
+	  </aside>
+	  <!-- 主页面容器 -->
+	  <div class="mui-inner-wrap">
+	    <!-- 主页面标题 -->
+	    
+	    <header class="mui-bar mui-bar-nav">
+	      <div id="callmenu" class="mui-action-menu"> 
+					<i class="iconfont icon-xinzengdaohangliebiao"></i>
+				</div>
+				<div>
+					<p class="fontcolor">记账</p>
+				</div>
+				<div>
+					<i class="iconfont icon-tongzhizhongxin"></i>
+				</div>
+	    </header>
+	    <div id="offCanvasContentScroll" class="mui-content mui-scroll-wrapper">
+	    	
+	    	<div class="mainbutton" id="mainbutton">
+					<button id="voice" class="">
+						<i class="iconfont icon-yuyin"></i>
+					</button>
+					<button id="keyboard" class="">
+						<i class="iconfont icon-jianpan"></i>
+					</button>
+				</div>
+				<div id="callvoice" class="thevoice">
+					<button  id="mkvoice" class="">
+						<i class="iconfont icon-yuyin"></i>
+					</button>
+				</div>
+				<div id="callinput" class="theinput">
+					<div class="return">
+						<button>
+							<i id="return" class="iconfont icon-chexiao"></i>
+						</button>
+					</div>
+					<input id="mkinput" />
+					<button id="submitinput" class="submit">提交</button>
+				</div>
+	      <div class="mui-scroll">
+	        <!-- 主界面具体展示内容 -->
+	        
+					<div class="cost">
+						<span id="number" class="number">0</span>
+						<span class="unit">元</span> 							
+					</div>
+					<div class="line">
+						<div class="lines">
+							<div class="words">今日限额</div>
+						</div>
+					</div>
+					
+          <div class="canvascontainer">
+          	<div class="canvasleft">
+          		<div class="head">
+         				<div class="photocontent">
+         					<img src="image/robot-img.png" /> 
+         				</div>
+          		</div>
+          		<div class="cell">
+							<div>
+								<i class="iconfont icon-zhuzhuangtu"></i>
+							</div>
+							<div>报表</div>
+						</div>
+						<div class="cell">
+							<div>
+								<i class="iconfont icon-bianji"></i>
+							</div>
+							<div>预算</div>
+						</div>
+						<div class="cell">
+							<div>
+								<i class="iconfont icon-liebiao"></i>
+							</div>
+							<div>明细</div>
+						</div>
+						<div class="cell">
+							<div>
+								<i class="iconfont icon-yun"></i>
+							</div>
+							<div>资讯</div>
+						</div>
+          	</div>
+          	<div class="canvasright">
+          		<div class="trangle"></div>	
+          		<div id="text-content" class="text-content">
+          			你好！欢迎回来。
+          		</div>
+          	</div>
+          	
+          </div>          
+                    
+                    
+                    
+					
+	      </div>
+	    </div>  
+	  </div>
+	</div> 
+	
+	 
+	
+	
+	<script type="text/javascript" src="js/gettime.js" ></script>
+	<script src="js/audio.js"></script>
+	<script type="text/javascript" charset="utf-8">
+//初始化开始----------------------
+    mui.init();
+    
+	//绑定自定义刷新函数开始----------------------	
+	
+    window.addEventListener('mainTran', function(e) { 
+        //执行刷新
+        console.log("刷新父页面");
+        location.reload();
+    });
+    
+    //绑定自定义刷新函数结束----------------------
+    var r = null; 
+    function onPlusReady() { 
+		r = plus.audio.getRecorder(); 
+	}
+    document.addEventListener( "plusready", onPlusReady, false );
+    mui.plusReady(function(){
+    	
+    	var nowtime = new Date();
+		var days = new Date(nowtime.getFullYear(),nowtime.getMonth()+1,0);
+	    //侧边栏用户姓名显示
+	    
+	    //if(localStorage.getItem("u_name")==null)
+	    document.getElementById("show_u_name").innerHTML = localStorage.getItem("u_name");
+	    
+	    //更新预算
+	    
+	    document.getElementById("number").innerHTML = parseFloat(localStorage.getItem("u_plan")/(days.getDate())).toFixed(2);
+	 
+	    
+				
+		// 扩展API加载完毕，现在可以正常调用扩展API 
+	
+	    
+	    
+	    
+	var token = "";
+//  function settoken(){
+    	token = localStorage.getItem("token");
+    	console.log(localStorage.getItem("token"));
+//  }
+    
+    //setTimeout("settoken",1000);
+	  /*获取token*/ 
+	 //localStorage.clear(); 
+	 //检验token
+	 function checktoken(){ 
+	 	if(token!=null){ 
+		 	console.log(localStorage.getItem("token"));
+		 }else{
+		 	mui.get('https://dc.1zdz.cn/root/gettoken.php',{},function(data){
+					//获得服务器响应
+					console.log(data.token);
+					//localStorage.setItem("token",data.token);
+					mui.openWindow({ 
+					    url:"person.html",
+					    extras:{
+				    	"token":data.token
+					    }
+					});
+				},'json'
+			);  
+			
+		 }
+	 }
+	 
+
+    	//用于主动向用户申请权限
+		//var rer = plus.audio.getRecorder();
+		 r.record({filename:"_doc/audio/test"},null,null);
+		 r.stop(); 
+		 /*登录返回响应*/
+		window.addEventListener('newsId',function(event){
+		  //获得事件参数
+		  var state = false;
+		  console.log(event.detail.state);
+		  state = event.detail.state;
+		  if(state){
+		  	alert("ok");	
+		  }
+		  //根据id向服务器请求新闻详情
+		});
+
+    	mui('#offCanvasSideScroll').scroll();  
+			mui('#offCanvasContentScroll').scroll();
+			var voiceClick = false;
+			var keyboardClick = false; 
+			var callmenu = document.getElementById("callmenu");
+			callmenu.addEventListener('tap',function(){
+				mui('.mui-off-canvas-wrap').offCanvas('show');
+			});		 
+			var count = 1;
+			var mainbutton = document.getElementById("mainbutton");
+			var voice = document.getElementById("voice");
+			var keyboard = document.getElementById("keyboard");
+			
+			var voicebtn = document.getElementById("callvoice");
+			var mkvoice = document.getElementById("mkvoice");
+			var inputbtn = document.getElementById("callinput");
+			var submitinput = document.getElementById("submitinput");
+			var mkinput = document.getElementById("mkinput");
+			var returns = document.getElementById("return");
+			var retext = document.getElementById("text-content");
+			
+			/*计算计划*/
+			var theplan = document.getElementById("number");
+			
+			var localtoken = localStorage.getItem('token');
+			var nowtime = new Date();
+			var localday = nowtime.getFullYear() + "-" + ((nowtime.getMonth()+1)<10?"0"+(nowtime.getMonth()+1):(nowtime.getMonth()+1)) + "-" + ((nowtime.getDate())<10?"0"+(nowtime.getDate()):(nowtime.getDate()));
+			var days = new Date(nowtime.getFullYear(),nowtime.getMonth()+1,0);
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			if(localtoken!=null)refreshjihua(localday,theplan);
+			/*---------*/
+			
+			/*add.addEventListener('tap',function(){
+				isClick = false;
+				count = 1;
+				add.className="remove";
+				voice.className="";
+				keyboard.className="";
+				var t = setInterval(function(){
+			  	if(count<=10&&isClick==false){
+			  		count++;
+			  	}else{
+			  		add.className="";
+					voice.className="remove";
+					keyboard.className="remove";
+			  		clearInterval(t);
+			  	}			  	
+				},200); 
+			});*/
+			voice.addEventListener('tap',function(){	
+				
+				voicebtn.className="thevoice btnshow"; 
+				mainbutton.className="mainbutton btnhidden";
+				voiceClick=false;
+				count = 1;
+				var t = setInterval(function(){
+			  	if(count<=10&&voiceClick==false){
+			  		count++;
+			  	}else if(count>10&&voiceClick==false){
+			  		voicebtn.className="thevoice btnhidden";
+						mainbutton.className="mainbutton btnshow";
+			  		clearInterval(t); 
+			  	}			  	
+				},500); 
+			});
+			keyboard.addEventListener('tap',function(){
+				inputbtn.className="theinput inputshow"; 
+				mainbutton.className="mainbutton btnhidden";
+				
+			});
+			returns.addEventListener('tap',function(){
+				mainbutton.className="mainbutton btnshow";
+				inputbtn.className="theinput inputhidden";
+			}); 
+			mkvoice.addEventListener('tap',function(){
+				
+			});
+			mkvoice.addEventListener('touchstart',function(){
+				voiceClick=true;
+				count = 1;
+			});
+			mkvoice.addEventListener('touchend',function(){
+				voiceClick=false;
+				count = 1;  
+			});
+			submitinput.addEventListener('tap',function(){
+				var getvalue = mkinput.value;
+				mkinput.value = "";
+				if(getvalue == null || getvalue == ""){
+					mui.toast("输入信息不能为空！");
+				}else{
+					retext.innerText="正在分析..."; 
+					console.log("ss:"+uploadurl);
+					mui.post('https://dc.1zdz.cn/root/analyzetext.php',{
+					token:token,
+					userstr: getvalue
+						},function(data){
+							//服务器返回响应，根据响应结果，分析是否登录成功；
+							if(data.code == 100){
+								mui.toast('分析成功！',{ duration:'long', type:'div' });
+								var type = "";
+		//						gettimes = createTime(data.data.ctime);
+								gettimes = data.data.ctime;
+								gettype = data.data.ctype;
+								getthing = data.data.cthing;
+								getmoneys = data.data.cmoney;
+								getcid = data.data.cid;
+								console.log(data.disc+" "+data.data.cmoney+" "+data.data.ctype+" "+data.data.ctime);
+								if(gettype == "out"){  
+									type = "支出";
+								}else{
+									type = "收入";
+								}
+								retext.innerHTML="您的消费信息：<br />"+
+			          			"类型:"+type+"<br />"+
+			          			"时间:"+createTime(data.data.ctime)+"<br />"+
+			          			"事件:"+getthing+"<br />"+
+			          			"金额:"+getmoneys+"<br />"+
+			          			"<div><button id='identity'>确认</button><button id='revise'>修改</button></div>";
+			          			confirmbox(localday,theplan,getthing,gettype,getmoneys,gettimes,getcid); 
+								/*if ( status == 200 ) { 
+									console.log(t.url);
+								} else {
+									react.innerHTML=t.state;     
+								}*/
+							}
+							else mui.toast('ERROR:'+data.disc,{ duration:'long', type:'div' });
+						},'json'
+					);
+				}
+			});
+			
+			
+
+		
+		
+//录音绑定开始----------------------		 
+			var uploadurl = "";
+			var returnurl = "";
+			mkvoice.addEventListener('touchstart',function(){
+				if(localStorage.getItem("token")==null){showvistor();}
+				else{
+					retext.innerText = "正在录音...";
+				  //ajax 传值
+				  var time = gettime();
+				  returnurl="_doc/audio/"+localStorage.getItem("u_id")+time;
+				 	startRecord(localStorage.getItem("u_id"),time);
+				 	if(returnurl!=0){
+				 		uploadurl = returnurl + ".amr";
+				 		console.log(uploadurl);    
+				 	}else{
+				 		return;
+				 	}
+				}
+				  
+			});
+//录音绑定结束----------------------	
+//获取时间开始----------------------
+			function createTime(data){
+				data = parseInt(data);
+				var time = new Date(data);
+				var year = time.getFullYear();
+				var month = (time.getMonth()+1)>=10?(time.getMonth()+1):"0"+(time.getMonth()+1);
+				var day = time.getDate()>=10?time.getDate():"0"+time.getDate();
+				var hour = time.getHours()>=10?time.getHours():"0"+time.getHours();
+				var minute = time.getMinutes()>=10?time.getMinutes():"0"+time.getMinutes();
+				return year+"-"+month+"-"+day+" "+hour+":"+minute;
+				//return time;
+			}
+//获取时间结束----------------------			
+			
+			
+//上传函数开始----------------------			
+			function createUpload(uploadurl) {
+				retext.innerText="正在分析...";  
+				console.log("ss:"+uploadurl);
+				var task = plus.uploader.createUpload( "https://dc.1zdz.cn/root/analyzevoice.php", 
+				{ method:"POST",blocksize:204800,priority:100 },
+				function (t, status) {
+					// 上传完成
+					var data = JSON.parse(t.responseText);
+					//服务器返回响应，根据响应结果，分析是否登录成功；
+					if(data.code == 100){
+						var localtoken = localStorage.getItem("token");var nowtime = new Date();
+						var currentday = nowtime.getFullYear() + "-" + ((nowtime.getMonth()+1)<10?"0"+(nowtime.getMonth()+1):(nowtime.getMonth()+1)) + "-" + ((nowtime.getDate())<10?"0"+(nowtime.getDate()):(nowtime.getDate()));
+						var theplan = document.getElementById("number");
+						
+						var type = "";
+//						gettimes = createTime(data.data.ctime);
+						gettimes = data.data.ctime;
+						gettype = data.data.ctype;
+						getthing = data.data.cthing;
+						getmoneys = data.data.cmoney;
+						getcid = data.data.cid;
+						console.log(data.data.cthing+" "+data.data.cmoney+" "+data.data.ctype+" "+data.data.ctime);
+						if(gettype == "out"){  
+							type = "支出";
+						}else{
+							type = "收入";
+						}
+						retext.innerHTML="您的消费信息：<br />"+ 
+	          			"类型:"+type+"<br />"+
+	          			"时间:"+createTime(data.data.ctime)+"<br />"+
+	          			"事件:"+getthing+"<br />"+
+	          			"金额:"+getmoneys+"<br />"+
+	          			"<div><button id='identity'>确认</button><button id='revise'>修改</button></div>";
+			          	confirmbox(currentday,theplan,getthing,gettype,getmoneys,gettimes,getcid); 
+						/*if ( status == 200 ) {
+							console.log(t.url);
+						} else {
+							react.innerHTML=t.state; 
+						}*/
+					}else{
+						mui.toast("语音出错:"+data.disc+",url"+uploadurl);
+						console.log("语音出错"); 
+						console.log(data.code);
+						console.log(data.disc); 
+					}
+				}
+			);
+			task.addFile( uploadurl, {key:"uservoice"});
+			//console.log("voice token:"+token);
+			task.addData( "token", localStorage.getItem('token'));
+			//task.addEventListener( "statechanged", onStateChanged, false );
+			task.start();
+		}	
+//上传函数结束---------------------- 			
+//语音结束绑定开始----------------------			
+			mkvoice.addEventListener("touchend",function(){
+				if(localStorage.getItem('token')!=null){
+					stopRecord();
+					retext.innerHTML="语音结束";
+					createUpload(uploadurl);  
+				}	
+			});
+//语音结束绑定结束----------------------			
+		
+			
+//重新计算本地计划函数开始----------------------
+		function refreshjihua(thelocalday,theplan){
+			var localtoken = localStorage.getItem("token"); 
+			console.log("开始刷新计划：token="+localtoken+",day="+thelocalday);
+			mui.post('https://dc.1zdz.cn/root/consume/select.php',{ 
+						token:localtoken,
+						day:thelocalday
+				},function(data){
+						if(data.code == 100){
+							var totalout = 0;
+							var i=0;
+							while(data.data[i]){
+								totalout+= data.data[i].ctype == "out"?parseInt(data.data[i].cmoney):0;
+								i++;
+							}
+							console.log("计划："+localStorage.getItem("u_plan"));
+							theplan.innerHTML = parseFloat(parseFloat(localStorage.getItem("u_plan"))/(days.getDate())-totalout).toFixed(2);  
+						}else if(data.code == 120){
+							console.log(data.disc);
+							theplan.innerHTML = parseFloat(localStorage.getItem("u_plan")/(days.getDate())).toFixed(2);
+						}
+					},'json'
+				);
+		}
+//重新计算本地计划函数结束----------------------		
+		
+//绑定对话按钮函数开始----------------------
+		function  confirmbox(thelocalday,theplan,getthing,gettype,getmoneys,gettimes,getcid){
+			var tooken = localStorage.getItem("token"); 
+			var identity = document.getElementById("identity");
+			var revise = document.getElementById("revise");
+			identity.addEventListener('tap',function(){
+				console.log("confirm:"+tooken); 
+				if(tooken == null){ 
+					console.log("开始showvisetor");
+					tooken = showvistor();
+				}
+					console.log("开始插入账单");
+					console.log("数据：token="+tooken+",time="+gettimes+",money="+getmoneys+",type="+gettype+",thing="+getthing+"day="+thelocalday);
+//					var cost = document.getElementById("number");
+		//									if(gettype == 'out'){
+		//										cost.innerText = parseFloat(parseFloat(cost.innerText) - parseFloat(getmoneys)).toFixed(2);
+		//									}else{
+		//										//cost.innerText = parseFloat(parseFloat(cost.innerText) + parseFloat(getmoneys)).toFixed(2);
+		//									}
+					/*上传最终确定数据*/
+					mui.post('https://dc.1zdz.cn/root/consume/insert.php',{
+							token:tooken,
+							time:gettimes,
+							money:getmoneys,
+							type:gettype,
+							thing:getthing
+					},function(data){
+							console.log("插入结果:"+data.disc);
+							if(data.code == 100){
+								//更新计划余额 
+								refreshjihua(thelocalday,theplan);
+								retext.innerHTML = "已帮您记录完成！";
+							}else{ 
+								console.log(data.disc); 
+							}
+						},'json'
+					);
+				
+			});
+			
+			revise.addEventListener('tap',function(){
+				mui.openWindow({
+			    url:"revise.html",
+			    id:revise,
+			    extras:{
+			    	"thing" : getthing,
+			    	"type" : gettype,
+			      "money" : getmoneys,
+			      "time" : createTime(gettimes),
+			      "cid" : getcid
+			      //自定义扩展参数，可以用来处理页面间传值 
+			    },
+			    createNew:true,//是否重复创建同样id的webview，默认为false:不重复创建，直接显示
+			    show:{
+			      autoShow:true,//页面loaded事件发生后自动显示，默认为true
+			      aniShow:"slide-in-right",//页面显示动画，默认为”slide-in-right“；
+			      duration:100//页面动画持续时间，Android平台默认100毫秒，iOS平台默认200毫秒；
+			    }
+				})
+			});
+		}
+//绑定对话按钮函数结束----------------------		
+//检测登录函数开始----------------------
+		function showvistor(){
+			var token = localStorage.getItem("token");
+			if(token == null){
+				console.log("进入showuser:"+token);
+				mui.confirm("当前操作需登录，是否立即注册或登录？","提示",['否','是'],function(e){
+					if (e.index == 1) {
+						checktoken();
+					}else{
+						mui.toast("未登录"); 
+					}
+				});
+			}else{
+				return token;
+			}
+			
+		}
+//检测登录函数结束----------------------	
+//跳转页面开始----------------------		
+		function leftrun(title){
+			var username = "13124252055";
+			var password = "a13124252055";
+			mui.openWindow({
+			    url:title+".html",
+			    id:title,
+			    extras:{
+			    	"unm" : username,
+			    	"pwd" : password
+			      //自定义扩展参数，可以用来处理页面间传值
+			    },
+			    createNew:true,//是否重复创建同样id的webview，默认为false:不重复创建，直接显示
+			    show:{
+			      autoShow:true,//页面loaded事件发生后自动显示，默认为true
+			      aniShow:"slide-in-right",//页面显示动画，默认为”slide-in-right“；
+			      duration:100//页面动画持续时间，Android平台默认100毫秒，iOS平台默认200毫秒；
+			    },
+			    waiting:{
+			      autoShow:true,//自动显示等待框，默认为true
+			      title:'正在加载...',//等待对话框上显示的提示内容
+			      options:{
+			        width:"100px",//等待框背景区域宽度，默认根据内容自动计算合适宽度
+			        height:"100px",//等待框背景区域高度，默认根据内容自动计算合适高度
+			      }
+			    }
+				})
+		}
+		var user = document.getElementById("user");
+		var product = document.getElementById("product");
+		var direction = document.getElementById("direction");
+		var setting = document.getElementById("setting");
+		var retext = document.getElementById("text-content");
+		/**/
+		var getthing = "";
+		var gettype = "";
+		var gettimes = "";
+		var getmoneys = "";
+		/**/
+		
+		
+		
+		user.addEventListener('tap',function(){
+			leftrun("user");
+		});
+		product.addEventListener('tap',function(){
+			leftrun("product");
+		}); 
+		direction.addEventListener('tap',function(){
+			leftrun("direction");
+		});
+		setting.addEventListener('tap',function(){
+			leftrun("setting");
+		});
+		
+		var cells = document.getElementsByClassName("cell");
+		cells[0].addEventListener('tap',function(){
+			leftrun("charts");
+		});
+		cells[1].addEventListener('tap',function(){
+			leftrun("budget");
+		});
+		cells[2].addEventListener('tap',function(){
+			leftrun("detail");
+		});
+		cells[3].addEventListener('tap',function(){
+			leftrun("information");
+		});
+//跳转页面结束----------------------	
+		});
+  </script>
+</body>
+</html>

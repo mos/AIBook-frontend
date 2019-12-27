@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/header.css" />
+		<link rel="stylesheet" href="css/iconfont.css" />
+		<link rel="stylesheet" href="css/buttongroup.css" />
+		<style type="text/css">
+			body{
+				background-color: white;
+			}
+			textarea{
+				width: 96%;
+				margin-top: 10px;
+				height: 180px;
+				margin-left: 2%;
+			}
+		</style>
+	</head>
+
+	<body class="container"> 
+		<header class="myheader"> 
+			<div class="mui-action-back"> 
+				<i class="iconfont icon-jiantou_liebiaoxiangzuo"></i>
+			</div>
+			<div>问题反馈</div>
+		</header>
+		
+		<div class="textcontent">
+			<textarea class="textarea" id="feed-back-textarea" draggable="false" placeholder="请输入建议内容"></textarea>
+		</div>
+		
+		<div class="buttongroup">
+			<!--<button>重置</button>-->
+			<button>提交</button>
+		</div>
+		
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			mui(".container").on('tap','.buttongroup',function(){
+			  var gettext = document.getElementById("feed-back-textarea").value;
+			  //console.log(gettext);
+			  if(gettext == "")mui.toast('请输入您的建议！',{ duration:'long', type:'div' });
+			  else{
+			  	mui.toast('感谢您的反馈！',{ duration:'long', type:'div' });
+			  	document.getElementById("feed-back-textarea").value="";
+			  } 
+			});
+		</script>
+	</body>
+
+</html>

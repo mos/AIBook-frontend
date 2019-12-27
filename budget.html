@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/header.css" />
+		<link rel="stylesheet" href="css/buttongroup.css" />
+		<link rel="stylesheet" href="css/iconfont.css" />
+		<style type="text/css">
+			body{
+				background-color: white;
+			}
+			.oldevent{
+				margin-top: 40px;
+				margin-left: 30px;
+			}
+			.oldevent>span:nth-child(1),.newevent>span{
+				font-size: 18px;
+				font-family: "微软雅黑";
+				margin-right: 10px;
+			}
+			.oldevent>span:nth-child(1){
+				margin-right: 20px;
+			}
+			.newevent{
+				margin-top: 20px;
+				margin-left: 30px;
+			}
+			.newevent>input{
+				width: 70%;
+				border: 0;
+				border-bottom: 1px solid gainsboro;
+			}
+		</style>
+	</head>
+
+	<body>
+		
+		<header class="myheader"> 
+			<div class="mui-action-back"> 
+				<i class="iconfont icon-jiantou_liebiaoxiangzuo"></i>
+			</div>
+			<div>设置预算</div>
+		</header>
+		
+		<div class="eventgroup">
+			<div class="oldevent">
+				<span>当前预算</span>
+				<span id="u_plan">加载中...</span>
+			</div>
+			<div class="newevent">
+				<span>设置预算</span>
+				<input id="newplan" type="text" placeholder="请输入新的预算" />
+			</div>
+		</div> 
+		
+		
+		
+		<div class="buttongroup">
+			<button id="submit">修改</button>
+		</div>
+		
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			mui.plusReady(function(){
+				//当前预算
+				var u_plan = localStorage.getItem("u_plan");
+				var u_planposition = document.getElementById("u_plan");
+				u_planposition.innerText = u_plan+"元";
+				//设置预算
+				var submitbtn = document.getElementById("submit");
+				submitbtn.addEventListener('tap',function(){
+					var n_plan = document.getElementById("newplan").value;
+					var localtoken = localStorage.getItem('token');
+					mui.post('https://dc.1zdz.cn/root/user/update.php',{
+							token:localtoken,
+							action:'uplan',
+							plan:n_plan
+						},function(data){
+							console.log(data.disc);
+							if(data.code == 100){
+								localStorage.setItem("u_plan",data.data.uplan); 
+								var mainAll = plus.webview.getLaunchWebview();
+								mui.fire(mainAll,'mainTran',{}); 
+								mui.toast("修改成功！");
+								
+								mui.back();
+							}else{
+								mui.toast(data.disc);
+								mui.back();
+							}
+						},'json'
+					);
+				});	
+			});
+		</script>
+	</body>
+
+</html>

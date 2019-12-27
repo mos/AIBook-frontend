@@ -1,0 +1,16 @@
+.buttongroup{
+	width: 100%;
+	margin-top: 20px;
+	text-align: center;
+}
+.buttongroup>button{
+	height: 30px;
+	width: 100px;
+}
+.buttongroup>button:nth-child(1){
+	margin-right: 20px;
+}
+.buttongroup>button:nth-child(2){
+	background-color: #383838;
+	color: white;
+}

@@ -1,0 +1,120 @@
+{"id":"H5CC1A704","name":"AI记账小管家","version":{"name":"1.0.0","code":"83"},"description":"","icons":{"72":"icon.png"},"launch_path":"index.html","developer":{"name":"463481325@qq.com","email":"463481325@qq.com","url":"http:\/\/www.dcloud.io"},"permissions":{"Cache":{"description":"plus.cache.*"},"Console":{"description":"plus.console.*"},"Events":{"description":"Events"},"Speech":{},"Stream":{"description":"plus.stream.*"},"Confusion":{"description":"Resource confusion"},"Audio":{"description":"plus.audio.*"},"Accelerometer":{"description":"plus.accelerometer.*"},"Barcode":{"description":"plus.barcode.*"},"Camera":{"description":"plus.camera.*"},"Device":{"description":"plus.device.*"},"Downloader":{"description":"plus.downloader.*"},"File":{"description":"plus.io.*"},"Gallery":{"description":"plus.gallery.*"},"Geolocation":{"description":"plus.geolocation.*"},"Invocation":{"description":"plus.android.*"},"NativeObj":{"description":"plus.nativeObj.*"},"NativeUI":{"description":"plus.nativeUI.*"},"Navigator":{"description":"plus.navigator.*"},"Orientation":{"description":"plus.orientation.*"},"Proximity":{"description":"plus.proximity.*"},"Runtime":{"description":"plus.runtime.*"},"Storage":{"description":"plus.storage.*"},"Uploader":{"description":"plus.uploader.*"},"Webview":{"description":"plus.webview.*"},"XMLHttpRequest":{"description":"plus.net.*"},"Zip":{"description":"plus.zip.*"}},"plus":{"distribute":{"google":{"permissions":["<uses-permission android:name=\"android.permission.RECORD_AUDIO\"/>","<uses-permission android:name=\"android.permission.READ_VOICEMAIL\"/>","<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>","<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>","<uses-permission android:name=\"android.permission.INTERNET\"/>","<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>","<uses-permission android:name=\"android.permission.WRITE_VOICEMAIL\"/>","<uses-permission android:name=\"android.permission.READ_LOGS\"/>","<uses-permission android:name=\"android.permission.AUTHENTICATE_ACCOUNTS\"/>","<uses-permission android:name=\"android.permission.CALL_PHONE\"/>","<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>","<uses-permission  android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\"/>","<uses-permission android:name=\"android.permission.BIND_VOICE_INTERACTION\"/>","<uses-permission android:name=\"android.permission.RECEIVE_USER_PRESENT\"/>","<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>","<uses-permission android:name=\"android.permission.CAPTURE_AUDIO_OUTPUT\"/>","<uses-permission android:name=\"android.permission.RECEIVE_BOOT_COMPLETED\"/>","<uses-permission android:name=\"android.permission.ADD_VOICEMAIL\"/>"]},"icons":{"android":{"hdpi":"unpackage/res/icons/72x72.png","mdpi":"unpackage/res/icons/48x48.png","ldpi":"unpackage/res/icons/48x48.png","xhdpi":"unpackage/res/icons/96x96.png","xxhdpi":"unpackage/res/icons/144x144.png","xxxhdpi":"unpackage/res/icons/192x192.png"},"ios":{"iphone":{"app@2x":"unpackage/res/icons/120x120.png","app@3x":"unpackage/res/icons/180x180.png","settings@3x":"unpackage/res/icons/87x87.png","settings@2x":"unpackage/res/icons/58x58.png","spotlight@2x":"unpackage/res/icons/80x80.png","spotlight@3x":"unpackage/res/icons/120x120.png","notification@3x":"unpackage/res/icons/60x60.png","notification@2x":"unpackage/res/icons/40x40.png"},"ipad":{"app":"unpackage/res/icons/76x76.png","app@2x":"unpackage/res/icons/152x152.png","settings":"unpackage/res/icons/29x29.png","proapp@2x":"unpackage/res/icons/167x167.png","spotlight":"unpackage/res/icons/40x40.png","settings@2x":"unpackage/res/icons/58x58.png","spotlight@2x":"unpackage/res/icons/80x80.png","notification":"unpackage/res/icons/20x20.png","notification@2x":"unpackage/res/icons/40x40.png"},"appstore":"unpackage/res/icons/1024x1024.png"}},"orientation":["portrait-primary"]},"splashscreen":{"autoclose":true,"waiting":true},"runmode":"liberate","signature":"Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==","statusbar":[],"adid":"126479310707"},
+	"dependencies": {
+		"pages": {
+			"index.html": {
+				"resources": [],
+				"refer": [
+					"budget.html",
+					"detail.html",
+					"user.html",
+					"product.html",
+					"direction.html",
+					"setting.html",
+					"person.html",
+					"charts.html",
+					"information.html",
+					"revise.html"
+				],
+				"priority": 0
+			},
+			"information.html": {
+				"resources": [],
+				"refer": [
+					"news/4000.html",
+					"news/1000.html",
+					"news/3000.html"
+				],
+				"priority": 0
+			},
+			"news/1000.html": {
+				"resources": [],
+				"refer": [
+					"information.html"
+				],
+				"priority": 0
+			},
+			"news/4000.html": {
+				"resources": [],
+				"refer": [
+					"information.html"
+				],
+				"priority": 0
+			},
+			"news/3000.html": {
+				"resources": [],
+				"refer": [
+					"information.html"
+				],
+				"priority": 0
+			},
+			"setting.html": {
+				"resources": [],
+				"refer": [
+					"feedback.html",
+					"index.html",
+					"person.html"
+				],
+				"priority": 0
+			},
+			"revise.html": {
+				"resources": [],
+				"refer": [
+					"person.html"
+				],
+				"priority": 0
+			},
+			"person.html": {
+				"resources": [],
+				"refer": [
+					"index.html"
+				],
+				"priority": 0
+			}
+		},
+		"idle": {
+			"resources": [
+				"js/mui.picker.min.js",
+				"image/05f46e6ccfcbf940e66fe38d0718ce4a.jpg",
+				"image/jietu/1.png",
+				"image/jietu/12.png",
+				"image/jietu/9.png",
+				"css/header.css",
+				"css/iconfont.css",
+				"fonts/iconfont.ttf",
+				"js/mui.js",
+				"css/mui.picker.min.css",
+				"image/jietu/5.png",
+				"image/jietu/7.png",
+				"event.html",
+				"image/robot-img.png",
+				"fonts/mui.ttf",
+				"image/jietu/10.png",
+				"css/mui.css",
+				"css/color.css",
+				"image/jietu/3.png",
+				"image/2b42a5bd265a513ebc938d999d95b22d.jpeg",
+				"css/calender.css",
+				"forget.html",
+				"css/form.css",
+				"image/jietu/13.png",
+				"image/jietu/6.png",
+				"js/calender.js",
+				"image/jietu/8.png",
+				"js/mui.min.js",
+				"image/ivwjchdnqqi.jpg",
+				"oldindex.html",
+				"image/241d23daed5e14921228084d61db19cd.jpg",
+				"js/gettime.js",
+				"image/jietu/15.png",
+				"image/jietu/11.png",
+				"image/jietu/14.png",
+				"css/buttongroup.css",
+				"image/jietu/4.png",
+				"image/jietu/2.png",
+				"css/mui.min.css",
+				"voice.html",
+				"image/jietu/16.png",
+				"js/audio.js"
+			]
+		}
+	}}

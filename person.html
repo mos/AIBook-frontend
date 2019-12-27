@@ -1,0 +1,285 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/header.css" />
+		<link rel="stylesheet" href="css/iconfont.css" />
+		<link rel="stylesheet" href="css/form.css" />
+		<style type="text/css">
+			html,body{
+				background-color: white;
+			}
+			.myheader{
+				position: fixed;
+				display: flex;
+				height: 50px; 
+				width: 100%;
+				box-shadow: 0 1px 1px rgba(153,153,153,100);
+				background-color: white;
+				z-index: 2;
+			}
+			.myheader>div:nth-child(1){
+				flex: 1;
+				text-align: center;
+				padding-top: 15px;
+			}
+			.myheader>div:nth-child(1)>.iconfont{
+				font-size: 40px;
+				color: rgba(80,80,80,100);
+			}
+			.myheader>div:nth-child(2){
+				flex: 7;
+				display: flex;
+				flex-direction: column;
+				padding-left: 0px;
+			}
+			.wordgroup{
+				display: flex;
+			}
+			.login{
+				flex: 3;
+				font-size: 15px;
+				margin-right: 20px;
+				text-align: right;
+			}
+			.register{
+				flex: 4;
+				font-size: 15px;
+			}
+			.isFocus{
+				font-weight: bolder;
+			}
+			.mui-slider-group{
+				margin-top: 50px;
+				background-color: white;
+			}
+			#item1,#item2{
+				background-color: white;
+			}
+		</style>
+	</head>
+
+	<body>
+		
+		
+		<div id="container" class="mui-content">
+			<div class="mui-slider">
+				<!--选项卡标题区-->
+				<header class="myheader"> 
+					<div class="mui-action-back"> 
+						<i class="iconfont icon-jiantou_liebiaoxiangzuo"></i>
+					</div>
+					<div class="tipgroup">
+						<div class="wordgroup">
+							<div id="logtitle" class="login isFocus">登录</div>					
+							<div id="regtitle" class="register">注册</div>
+						</div>
+					</div>
+				</header>
+				<div class="mui-slider-group">
+					<!--第一个选项卡内容区-->
+					<div id="item1" class="mui-slider-item mui-control-content mui-active">
+						<div class="forms">
+							<div class="list">
+								<div class="listtitle">手机号</div>
+								<div class="listitem">
+									<input id="phone" type="text" placeholder="请输入手机号" maxlength="11" value="18958963546" />
+								</div>
+							</div>
+							<div class="list">
+								<div  class="listtitle">密码</div>
+								<div class="listitem">
+									<input id="password" type="password" value="1" />
+								</div>
+							</div>
+						</div>
+						<div class="bigbutton">
+							<button id="login">登录</button>
+						</div>
+						<div style="height: 200px;"></div>
+					</div>
+					<!--第二个选项卡内容区-->
+					<div id="item2" class="mui-slider-item mui-control-content">
+						<div class="forms">
+							<div class="list">
+								<div class="listtitle">+86</div>
+								<div class="listitem">
+									<input id="pon" type="text" placeholder="请输入手机号" maxlength="11"/>
+								</div>
+							</div>
+							<div class="list">
+								<div class="listtitle">验证码</div>
+								<div class="listitem">
+									<input id="checkcode" class="code" type="text" />
+									<button id="send" class="send">发送</button>
+								</div>
+							</div>
+							<div class="list">
+								<div class="listtitle">密码</div>
+								<div class="listitem">
+									<input id="pwd" type="password" />
+								</div>
+							</div>
+						</div>
+						<div class="bigbutton">
+							<button id="register">注册</button>
+						</div>
+						<div style="height: 200px;"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		
+		
+		
+		
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			var container1 = document.getElementById('item1');
+			var container2 = document.getElementById('item2');
+			var logtitle = document.getElementById('logtitle');
+			var regtitle = document.getElementById('regtitle');
+			
+			
+			var loginbtn = document.getElementById("login");
+			var registerbtn = document.getElementById("register");
+			var sendbtn = document.getElementById("send");
+			
+			var getcode;
+			
+			var token = "";
+			
+			logtitle.addEventListener('tap',function(){
+				
+			});
+			regtitle.addEventListener('tap',function(){
+					
+			});
+			document.querySelector('.mui-slider').addEventListener('slide', function(event) {
+			  //注意slideNumber是从0开始的；
+			  if(event.detail.slideNumber == 0){
+					regtitle.className = 'register';
+					logtitle.className = 'login isFocus';
+				}else{
+					regtitle.className = 'register isFocus';
+					logtitle.className = 'login';
+				}
+			});
+			
+			mui.plusReady(function(){
+				var pre = plus.webview.currentWebview();
+				token = pre.token;
+				loginbtn.addEventListener('tap',function(){
+					var phone = document.getElementById('phone').value;
+					var password = document.getElementById("password").value;
+					mui.post('https://dc.1zdz.cn/root/user/login.php',{
+							phone:phone,
+							password:password,
+							token:token
+						},function(data){
+							console.log("发送服务器");
+							//服务器返回响应，根据响应结果，分析是否登录成功；
+							if(data.code == 100){
+								mui.toast(data.disc);
+								console.log("登录成功：");
+								console.log("u_id:"+data.data.uid);
+								console.log("token:"+data.data.token);
+								console.log("u_name:"+data.data.uname); 
+								localStorage.setItem("token",data.data.token);
+								localStorage.setItem("u_id",data.data.uid);
+								localStorage.setItem("u_phone",data.data.uphone);
+								localStorage.setItem("u_name",data.data.uname);
+								localStorage.setItem("u_logo",data.data.ulogo);
+								localStorage.setItem("u_note",data.data.unote);
+								localStorage.setItem("u_plan",data.data.uplan);
+								localStorage.setItem("u_role",data.data.urole);
+								localStorage.setItem("u_sex",data.data.usex);
+								localStorage.setItem("a_name",data.data.ainame);
+								localStorage.setItem("a_logo",data.data.ailogo);
+								mui.fire(plus.webview.getLaunchWebview(),'getstate',{state:true});
+//								mui.openWindow({ 
+//								    url:"index.html"
+//								});
+								mui.back(); 
+							}else{
+								mui.toast(data.disc);
+							} 
+						},'json'
+					);
+					
+				});
+				sendbtn.addEventListener('tap',function(){
+					var pon = document.getElementById("pon").value;
+					mui.post('https://dc.1zdz.cn/root/getmsg.php',{
+							phone:pon
+						},function(data){
+							console.log("获取验证码响应成功:"+data.ckmsg);
+							//服务器返回响应，根据响应结果，分析是否登录成功；
+							getcode=data.ckmsg;
+						},'json'
+					);
+				});
+				registerbtn.addEventListener('tap',function(){
+					var pon = document.getElementById("pon").value;
+					var pwd = document.getElementById("pwd").value;
+					var checkcode = document.getElementById("checkcode").value;
+					console.log(getcode);
+					console.log(token);
+					console.log(pon);
+					console.log(pwd);
+					if(checkcode == getcode){
+						console.log("验证码正确，开始注册");
+						mui.post('https://dc.1zdz.cn/root/user/register.php',{
+							phone:pon,
+							password:pwd,
+							token:token
+						},function(data){
+							console.log("开始判断注册是否成功");
+							if(data.code == 100){
+								mui.toast("注册成功！");
+								document.getElementById("pon").value="";
+								document.getElementById("pwd").value="";
+								document.getElementById("checkcode").value="";
+								//保存数据，直接返回首页，省略登录
+								localStorage.setItem("u_id",data.data.uid);
+								localStorage.setItem("u_phone",data.data.uphone);
+								localStorage.setItem("u_name",data.data.uname);
+								localStorage.setItem("u_logo",data.data.ulogo);
+								localStorage.setItem("u_note",data.data.unote);
+								localStorage.setItem("u_plan",data.data.uplan);
+								localStorage.setItem("u_role",data.data.urole);
+								localStorage.setItem("u_sex",data.data.usex);
+								localStorage.setItem("a_name",data.data.ainame);
+								localStorage.setItem("a_logo",data.data.ailogo);
+								mui.toast("自动登录成功");
+								mui.fire(plus.webview.getLaunchWebview(),'getstate',{state:true});
+								mui.fire(mainAll,'mainTran',{}); 
+								mui.back();
+							}else{
+								mui.toast(data.disc);
+								console.log("注册失败："+data.disc);
+							}
+						},'json'
+					);
+					}else{
+						console.log("验证码错误，清空验证码框");
+						mui.toast("验证码错误");
+						document.getElementById("checkcode").value="";
+					}
+					
+					
+				});
+				
+				
+				
+			});
+		</script>
+	</body>
+
+</html>

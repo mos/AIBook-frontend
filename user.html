@@ -1,0 +1,224 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/header.css" />
+		<link rel="stylesheet" href="css/iconfont.css" />
+		<link rel="stylesheet" href="css/buttongroup.css" />
+		<style type="text/css">
+			body{
+				background-color: white;
+			}
+			.container{
+				display: flex;
+				padding-top: 20px;
+			}
+			.photo{
+				flex: 4;
+				text-align: center;
+				padding-top: 20px;
+				padding-left: 10px;
+			}
+			.photo>img{
+				width: 90px;
+				border: 1px solid gray;
+				border-radius: 90px;
+			}
+			.form{
+				flex: 6;
+			}
+			.item{
+				padding-top: 10px;
+				width: 100%;
+				color: #383838;
+			}
+			.item>div,.item>input{
+				float: left;
+			}
+			.item>div{
+				width: 30%;
+				font-size: 20px;
+				font-family: "微软雅黑";
+			}
+			.item>.nickname{
+				width: 100px;
+				height: 30px;
+				margin-top: -5px;
+				border: none;
+				margin-left: -10px;
+			}
+			.option{
+				float: left;
+				width: 60%;
+				height: 30px;
+				padding: 0;
+				margin-top: -3px;
+				text-align: center;
+				font-size: 17px;
+			}
+			.sig{
+				padding-left: 20px;
+			}
+			.title{
+				font-family: "微软雅黑";
+				font-size: 18px;
+				color: #383838;
+			}
+			textarea{
+				width: 85%;
+				height: 100px;
+				margin-left: 5%;
+				margin-top: 20px;
+			}
+		</style>
+	</head>
+
+	<body class="container-body">
+		<header class="myheader"> 
+			<div class="mui-action-back"> 
+				<i class="iconfont icon-jiantou_liebiaoxiangzuo"></i>
+			</div>
+			<div>用户</div>
+		</header>
+		<div class="container">
+			<div class="photo">
+				<img src="image/2b42a5bd265a513ebc938d999d95b22d.jpeg" />
+			</div>
+			<div class="form">
+				<div class="item">
+					<div>昵称</div>
+					<input class="nickname" id="user-name" type="text" value=""/>
+				</div>
+				<div class="item">
+					<div>性别</div>
+					<select class="option" name="user-sex">
+						<option>男</option>
+						<option>女</option>
+						<option>保密</option>
+					</select>
+				</div>
+				<div class="item">
+					<div>身份</div>
+					<select class="option" name="user-work">
+						<option>工作者</option>
+						<option>学生</option>
+						<option>儿童</option>
+						<option>退休人员</option>
+						<option>保密</option>
+					</select>
+				</div>
+			</div>
+		</div>
+		<!--<div class="sig">
+				<div class="title">个性签名</div>
+				<textarea></textarea>
+		</div>-->
+		<div class="buttongroup">
+			<!--<button>重置</button>-->
+			<button>修改</button>
+		</div>
+		
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init({
+	        	beforeback: function() {　　 
+		          //获得父页面的webview
+		          var list = plus.webview.currentWebview().opener();　　
+		          //触发父页面的自定义事件(refresh),从而进行刷新
+		          mui.fire(list, 'sd');
+		          //返回true,继续页面关闭逻辑
+		          return true;
+		        }
+	        	
+		  });
+		//显示用户信息
+		mui.plusReady(function(){
+			console.log(localStorage.getItem("u_role"));  
+		  	document.getElementById("user-name").value = localStorage.getItem("u_name");
+			var sel_sex = document.getElementsByName("user-sex")[0];
+		    for(i=0;i<sel_sex.length;i++){
+		        if(sel_sex[i].value==localStorage.getItem("u_sex"))sel_sex[i].selected = true;
+		        else sel_sex[i].selected = false;
+		    }
+		    var sel_work = document.getElementsByName("user-work")[0];
+		    for(i=0;i<sel_work.length;i++){
+		        if(sel_work[i].value==localStorage.getItem("u_role"))sel_work[i].selected = true;
+		        else sel_work[i].selected = false;
+		    }
+		}); 
+		  //进入获取用户信息
+//			mui.post('https://dc.1zdz.cn/root/user/select.php',{
+//					token:'1732076acb2f1b7cf160b9b8ecc5b945' 
+//				},function(data){
+//					//服务器返回响应，根据响应结果，分析是否登录成功；
+//					if(data.code == 100){
+//						//mui.toast('获取成功！',{ duration:'long', type:'div' });
+//						document.getElementById("user-name").value=data.data.uname;
+//						var sel_sex = document.getElementsByName("user-sex")[0];
+//					    for(i=0;i<sel_sex.length;i++){
+//					        if(sel_sex[i].value==data.data.usex)sel_sex[i].selected = true;
+//					        else sel_sex[i].selected = false;
+//					    }
+//					    var sel_work = document.getElementsByName("user-work")[0];
+//					    for(i=0;i<sel_work.length;i++){
+//					        if(sel_work[i].value==data.data.urole)sel_work[i].selected = true;
+//					        else sel_work[i].selected = false;
+//					    }
+//					}
+//					else mui.toast('ERROR:'+data.disc,{ duration:'long', type:'div' });
+//				},'json'
+//			);
+			//点击修改触发更新用户信息
+			mui(".container-body").on('tap','.buttongroup',function(){
+				var name = document.getElementById("user-name").value;
+				var sex = document.getElementsByName("user-sex")[0].value;
+				var work = document.getElementsByName("user-work")[0].value;
+				mui.post('https://dc.1zdz.cn/root/user/update.php',{
+						token:localStorage.getItem('token'),
+						action:'uname,usex,urole',
+						name:name,
+						sex:sex,
+						role:work
+					},function(data){
+						//服务器返回响应，根据响应结果，分析是否登录成功；
+						if(data.code == 100){
+							mui.toast('修改成功！',{ duration:'long', type:'div' });
+							document.getElementById("user-name").value=data.data.uname;
+							var sel_sex = document.getElementsByName("user-sex")[0];
+						    for(i=0;i<sel_sex.length;i++){
+						        if(sel_sex[i].value==data.data.usex)sel_sex[i].selected = true;
+						        else sel_sex[i].selected = false;
+						    }
+						    var sel_work = document.getElementsByName("user-work")[0];
+						    for(i=0;i<sel_work.length;i++){
+						        if(sel_work[i].value==data.data.urole)sel_work[i].selected = true;
+						        else sel_work[i].selected = false;
+						    }
+						    //更新用户本地信息
+						    console.log("u_id:"+data.data.uid);
+							localStorage.setItem("u_id",data.data.uid);
+							localStorage.setItem("u_phone",data.data.uphone);
+							localStorage.setItem("u_name",data.data.uname);
+							localStorage.setItem("u_logo",data.data.ulogo);
+							localStorage.setItem("u_note",data.data.unote);
+							localStorage.setItem("u_plan",data.data.uplan);
+							localStorage.setItem("u_role",data.data.urole);
+							localStorage.setItem("u_sex",data.data.usex);
+							localStorage.setItem("a_name",data.data.ainame);
+							localStorage.setItem("a_logo",data.data.ailogo);
+						}
+						else mui.toast('ERROR:'+data.disc,{ duration:'long', type:'div' });
+						//修改本地数据
+						
+					},'json'
+				);
+			});
+			
+		</script>
+	</body>
+
+</html>

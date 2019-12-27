@@ -1,0 +1,162 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/header.css" />
+		<link rel="stylesheet" href="css/iconfont.css" />
+		<link rel="stylesheet" href="css/calender.css" />
+		<style type="text/css">
+			body{
+				background-color: white;
+			}
+			.calendar{
+				margin: 15px auto;
+			}
+			th{
+				color: #383838;
+			}
+			.costtitle{
+    		height: 40px;
+    		width: 100%;
+    		padding-top: 10px;
+    		padding-left: 7px;
+    		font-size: 18px;
+    		font-family: "微软雅黑";
+    	}
+    	.mui-table-view-cell>span:nth-child(1){
+    		padding-right: 20px;
+    	}
+    	.choosedate{
+    		letter-spacing: 1px;
+    		font-size: 16px;
+    		height: 40px;
+    		text-align: center;
+    		padding: 10px 0;
+    		font-family: "微软雅黑";
+    		border-top: 1px solid gainsboro;
+    		border-bottom: 1px solid gainsboro;
+    	}
+    	.total{
+    		height: 30px;
+    		line-height: 30px;
+    		font-family: "微软雅黑";
+    		font-size: 17px;
+    		background-color: whitesmoke;
+    	}
+    	#shou,#zhi{
+    		display: inline-block;
+    		width: 50%;
+    		text-align: center;
+    	}
+    	.red{
+    		background-color: rgba(255,50,50,0.1);
+    	}
+    	.green{
+    		background-color: rgba(114,238,114,0.2);
+    	}
+    	.de-left,.de-right{
+    		display: inline-block;
+    	}
+    	.de-left{
+    		text-align: left;width: 75%;
+    	}
+    	.de-right{
+    		text-align: right;width: 25%; 
+    	}
+    	
+		</style>
+	</head>
+
+	<body>
+		<header class="myheader"> 
+			<div class="mui-action-back"> 
+				<i class="iconfont icon-jiantou_liebiaoxiangzuo"></i>
+			</div>
+			<div>消费信息</div>
+		</header>
+		<div class='calendar' id='calendar'></div> 
+		<div class="choosedate" id="choosedate"></div>
+		<div class="costlist">
+			<!--<div class="costtitle">
+				当日总收支
+			</div>-->
+			<!--<button>手动添加一笔</button>-->
+			<div class="total">
+				<span id="zhi" class="mui-badge-green">支出：-00 元</span><span id="shou" class="mui-badge-red">收入：+00 元</span>
+			</div>
+			<div class="listitem">
+				<ul class="mui-table-view" id="containers">   
+				</ul>
+			</div>
+		
+		
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript" src="js/calender.js" ></script>
+		<script type="text/javascript">
+			mui.init();
+			var token = localStorage.getItem("token");
+			mui.plusReady(function(){
+				var str = document.getElementById("choosedate").innerHTML;
+				var seltime = str.substring(0,4)+"-"+str.substring(5,7)+"-"+str.substring(8,10); 
+				console.log(seltime);
+				var localtoken = token;
+				var localday = seltime;
+				//var nowtime = new Date();
+				//var localday = nowtime.getFullYear() + "-" + ((nowtime.getMonth()+1)<10?"0"+(nowtime.getMonth()+1):(nowtime.getMonth()+1)) + "-" + ((nowtime.getDate())<10?"0"+(nowtime.getDate()):(nowtime.getDate()));
+				console.log(localday);
+				refresh(localtoken,localday);
+				var cal = document.getElementById("calendar");
+				cal.addEventListener('tap',function(){
+					var str = document.getElementById("choosedate").innerHTML;
+					var seltime = str.substring(0,4)+"-"+str.substring(5,7)+"-"+str.substring(8,10); 
+					refresh(localtoken,seltime);
+				});
+				
+			})
+			
+			function refresh(localtoken,localday){
+				mui.post('https://dc.1zdz.cn/root/consume/select.php',{
+						token:localtoken,
+						day:localday
+					},function(data){
+						//服务器返回响应，根据响应结果，分析是否登录成功；
+						if(data.code == 100){
+							var containers = document.getElementById("containers");
+							var totalout = 0;
+							var totalin = 0;
+							var color = "";
+							containers.innerHTML="";  
+							var i=0;
+							var ddd = new Date();
+							while(data.data[i]){
+								ddd.setTime(data.data[i].ctime); 
+								var settime = (ddd.getHours()<10?"0"+ddd.getHours():ddd.getHours())+":"+(ddd.getMinutes()<10?"0"+ddd.getMinutes():ddd.getMinutes());
+								if(data.data[i].ctype == "out"){color="green";}else{color="red"};
+								containers.innerHTML+='<li class="mui-table-view-cell '+color+'"><span class="de-left">'+settime+"&nbsp;&nbsp;&nbsp;&nbsp;"+data.data[i].cthing+'</span><span class="de-right">'+(data.data[i].ctype == "out"?"-":"+")+data.data[i].cmoney+'元</span></li>';
+								totalout+= data.data[i].ctype == "out"?parseFloat(data.data[i].cmoney):0;
+								totalin+=data.data[i].ctype == "in"?parseFloat(data.data[i].cmoney):0;
+								i++;
+							}
+							document.getElementById("shou").innerHTML="收入：+ "+totalin.toFixed(2)+" 元";
+							document.getElementById("zhi").innerHTML="支出：- "+totalout.toFixed(2)+" 元"; 
+						}else if(data.code == 120){
+							var containers = document.getElementById("containers");
+							var totalout = 0;
+							var totalin = 0;
+							containers.innerHTML="";
+							document.getElementById("shou").innerHTML="收入：+ "+totalin.toFixed(2)+" 元";
+							document.getElementById("zhi").innerHTML="支出：- "+totalout.toFixed(2)+" 元"; 
+						}
+					},'json'
+				);
+			}
+			
+			
+		</script>
+	</body>
+
+</html>
